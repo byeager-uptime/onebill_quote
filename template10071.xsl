@@ -174,7 +174,7 @@
 					<!-- Monthly Fees Section -->
 					<xsl:if test="$isRecurringPresent or $isBundlePresent">
 						<fo:block margin-top="15pt" margin-bottom="10pt">
-							<fo:block font-size="14pt" font-weight="bold" color="{$uptime_blue}" margin-bottom="15pt">
+							<fo:block font-size="14pt" font-weight="bold" color="{$uptime_blue}" margin-bottom="25pt">
 								Monthly Fees
 							</fo:block>
 
