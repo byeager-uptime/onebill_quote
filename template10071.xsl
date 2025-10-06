@@ -366,28 +366,21 @@
 											</fo:table-cell>
 										</fo:table-row>
 									</xsl:for-each>
+
+									<!-- Monthly Fee Total -->
+									<fo:table-row keep-together.within-page="always">
+										<fo:table-cell number-columns-spanned="5" padding="8pt" text-align="right"
+											background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
+											<fo:block font-weight="bold" font-size="11pt">Monthly Fee Total:</fo:block>
+										</fo:table-cell>
+										<fo:table-cell padding="8pt" text-align="right" background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
+											<fo:block font-weight="bold" font-size="11pt">
+												<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))"/>
+											</fo:block>
+										</fo:table-cell>
+									</fo:table-row>
 								</fo:table-body>
 							</fo:table>
-
-							<!-- Monthly Fee Total Box -->
-							<fo:block margin-top="10pt" background-color="#F5F5F5" padding="8pt" fox:border-radius="8pt">
-								<fo:table width="100%" table-layout="fixed">
-									<fo:table-column column-width="83.33%"/>
-									<fo:table-column column-width="16.67%"/>
-									<fo:table-body>
-										<fo:table-row>
-											<fo:table-cell text-align="right">
-												<fo:block font-weight="bold" font-size="11pt">Monthly Fee Total:</fo:block>
-											</fo:table-cell>
-											<fo:table-cell text-align="right">
-												<fo:block font-weight="bold" font-size="11pt">
-													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))"/>
-												</fo:block>
-											</fo:table-cell>
-										</fo:table-row>
-									</fo:table-body>
-								</fo:table>
-							</fo:block>
 						</fo:block>
 					</xsl:if>
 
@@ -546,28 +539,21 @@
 											</fo:table-cell>
 										</fo:table-row>
 									</xsl:for-each>
+
+									<!-- One-Time Total -->
+									<fo:table-row keep-together.within-page="always">
+										<fo:table-cell number-columns-spanned="5" padding="8pt" text-align="right"
+											background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
+											<fo:block font-weight="bold" font-size="11pt">One-Time Total:</fo:block>
+										</fo:table-cell>
+										<fo:table-cell padding="8pt" text-align="right" background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
+											<fo:block font-weight="bold" font-size="11pt">
+												<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))"/>
+											</fo:block>
+										</fo:table-cell>
+									</fo:table-row>
 								</fo:table-body>
 							</fo:table>
-
-							<!-- One-Time Total Box -->
-							<fo:block margin-top="10pt" background-color="#F5F5F5" padding="8pt" fox:border-radius="8pt">
-								<fo:table width="100%" table-layout="fixed">
-									<fo:table-column column-width="83.33%"/>
-									<fo:table-column column-width="16.67%"/>
-									<fo:table-body>
-										<fo:table-row>
-											<fo:table-cell text-align="right">
-												<fo:block font-weight="bold" font-size="11pt">One-Time Total:</fo:block>
-											</fo:table-cell>
-											<fo:table-cell text-align="right">
-												<fo:block font-weight="bold" font-size="11pt">
-													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))"/>
-												</fo:block>
-											</fo:table-cell>
-										</fo:table-row>
-									</fo:table-body>
-								</fo:table>
-							</fo:block>
 						</fo:block>
 					</xsl:if>
 
