@@ -119,6 +119,13 @@
 										<xsl:value-of select="/quote/createdByEmail"/>
 									</fo:block>
 									<fo:block font-size="10pt" font-weight="bold" text-align="right">
+										<xsl:if test="/quote/quoteCreatedDate !=''">
+											Issued: <xsl:value-of select="concat(substring(/quote/quoteCreatedDate, 6, 2), '/',
+											                                      substring(/quote/quoteCreatedDate, 9, 2), '/',
+											                                      substring(/quote/quoteCreatedDate, 1, 4))"/>
+										</xsl:if>
+									</fo:block>
+									<fo:block font-size="9pt" text-align="right" margin-top="2pt">
 										Valid for 30 days from issue date
 									</fo:block>
 								</fo:block>
