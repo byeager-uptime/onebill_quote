@@ -102,23 +102,23 @@
 							<!-- Right: Gray Box with Customer Info + ESTIMATE -->
 							<fo:table-cell padding="5pt">
 								<fo:block background-color="#E8E8E8" padding="10pt">
-									<fo:block font-size="28pt" font-weight="bold" text-align="center" margin-bottom="8pt">
+									<fo:block font-size="28pt" font-weight="bold" text-align="right" margin-bottom="8pt">
 										ESTIMATE
 									</fo:block>
-									<fo:block font-weight="bold" font-size="11pt" text-align="center" margin-bottom="4pt">
+									<fo:block font-weight="bold" font-size="11pt" text-align="right" margin-bottom="4pt">
 										<xsl:value-of select="/quote/quoteSubscriberProfile/subscriberName"/>
 									</fo:block>
-									<fo:block font-size="9pt" text-align="center" margin-bottom="2pt">
+									<fo:block font-size="9pt" text-align="right" margin-bottom="2pt">
 										<xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine1"/>
 										<xsl:if test="/quote/quoteSubscriberProfile/billingAddress/addLine2 !=''">, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine2"/></xsl:if>
 										, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/city"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/state"/>
 										<xsl:text> </xsl:text>
 										<xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/zip"/>
 									</fo:block>
-									<fo:block font-size="9pt" text-align="center" margin-bottom="8pt">
+									<fo:block font-size="9pt" text-align="right" margin-bottom="8pt">
 										<xsl:value-of select="/quote/createdByEmail"/>
 									</fo:block>
-									<fo:block font-size="10pt" font-weight="bold" text-align="center">
+									<fo:block font-size="10pt" font-weight="bold" text-align="right">
 										Valid for 30 days from issue date
 									</fo:block>
 								</fo:block>
@@ -152,9 +152,9 @@
 										<fo:block>Coleman MI 48618</fo:block>
 									</fo:table-cell>
 									<fo:table-cell text-align="right">
-										<fo:block>Phone: 989-402-4026</fo:block>
-										<fo:block>Email: help@uptimevoip.co</fo:block>
-										<fo:block>Web: uptimevoip.co</fo:block>
+										<fo:block>855.402.VOIP (8647)</fo:block>
+										<fo:block>help@uptimevoip.co</fo:block>
+										<fo:block>uptimevoip.co</fo:block>
 									</fo:table-cell>
 								</fo:table-row>
 							</fo:table-body>
@@ -599,121 +599,275 @@
 						</fo:block>
 					</xsl:if>
 
-					<!-- Terms and Conditions -->
+					<!-- Master Services Agreement -->
 					<fo:block margin-top="20pt" font-family="{$font_family}" font-size="7pt"
 						border-top="1pt solid #CCCCCC" padding-top="10pt" keep-together.within-page="auto">
-						<fo:block font-weight="bold" font-size="9pt" margin-bottom="8pt" color="{$uptime_blue}">
-							Terms and Conditions
+						<fo:block font-weight="bold" font-size="11pt" margin-bottom="8pt" color="{$uptime_blue}" text-align="center">
+							MASTER SERVICES AGREEMENT
+						</fo:block>
+						<fo:block space-after="8pt" font-size="8pt">
+							By signing this quote, Customer ("<fo:inline font-weight="bold">Client</fo:inline>") agrees to be bound by this Master Services Agreement with Uptime Services Corporation ("<fo:inline font-weight="bold">Provider</fo:inline>"). This quote serves as a Statement of Service under this Agreement. All quotes must be paid in full by the electronic payment method on file before equipment can be ordered.
+						</fo:block>
+						<fo:block space-after="8pt" font-weight="bold" font-size="8pt">
+							Contract Term: <xsl:value-of select="/quote/contractTerm"/> from Activation Date
+						</fo:block>
+
+						<!-- Section 1: Definitions -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							1. DEFINITIONS
 						</fo:block>
 						<fo:block space-after="4pt">
-							Orders are subject to the terms of your signed agreement with Uptime VoIP. All quotes must be paid in full by the electronic payment method on file before equipment can be ordered.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">1. Term And Termination Of Agreement</fo:block>
-						<fo:block space-after="4pt">
-							This Agreement is effective upon the date signed. Unless otherwise amended, this Agreement shall remain in force for the duration specified in your signed agreement beginning from the Activation Date. This Agreement may only be terminated by Client upon sixty (60) days written notice if UPTIME SERVICES CORPORATION (a) fails to fulfill in any material respect its obligations under this Agreement and does not cure such failure within thirty (30) days of receipt of such written notice, or (b) terminates or suspends its business operations, unless it is succeeded by a permitted assignee under this Agreement. This Agreement may be terminated by UPTIME SERVICES CORPORATION upon sixty (60) days written notice to Client. If either party terminates this Agreement, UPTIME SERVICES CORPORATION will assist Client in the orderly termination of services, including timely transfer of the services to another designated provider. Client agrees to pay UPTIME SERVICES CORPORATION the actual costs of rendering such assistance.
+							<fo:inline font-weight="bold">"Activation Date"</fo:inline> means the earlier of (a) the date the Services are provisioned and capable of originating and/or receiving calls using a temporary or ported number, or (b) the date any Service goes into production. Billing starts on the Activation Date whether or not Client has begun use.
 						</fo:block>
 						<fo:block space-after="4pt">
-							1.1 Activation Date shall be defined as the date your services are available for use with either a temporary or ported number. This does not require the installation of equipment or registration of any telephony devices. Billing of subscribed services will commence on the Activation Date. Use of the services by Client is not a requirement for services to considered active or billable.
+							<fo:inline font-weight="bold">"Services"</fo:inline> means the hosted VoIP, SIP, UCaaS, related features, support, and any professional services that Provider supplies to Client as described in this quote or a Statement of Service.
 						</fo:block>
 						<fo:block space-after="4pt">
-							1.2 Upon maturation of this agreement Client shall continue services on a month-to-month basis. Client may terminate services at any time with sixty (60) days written notice and without any penalty.
+							<fo:inline font-weight="bold">"MRC"</fo:inline> means monthly recurring charges for the applicable Service(s), excluding usage, pass-through surcharges, taxes, one-time fees, and third-party charges.
 						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">2. Statements Of Service; Fees And Payments; Taxes</fo:block>
-						<fo:block space-after="4pt">
-							2.1 Statements of Service shall describe in detail the services to be performed by UPTIME SERVICES CORPORATION, and this Agreement hereby incorporates all attached and subsequent Statements of Service that refer specifically to this Agreement by name and date of execution, or the MSA Number.
+						<fo:block space-after="6pt">
+							<fo:inline font-weight="bold">"Statement of Service" or "SoS"</fo:inline> means an order, quote, proposal, or statement of work executed by both parties that references this MSA, specifies the Services, quantities, term and pricing.
 						</fo:block>
-						<fo:block space-after="4pt">
-							2.2 Client will receive an invoice on a monthly basis, and it will become due and payable on the date of the invoice. Client shall have 15 calendar days until a late fee is assessed. Unless otherwise agreed in writing, Client is required to maintain an automated method of payment on file. This may be credit card or ACH. All services will be suspended if payment is not received within 30 days following the due date. Client will be billed a charge of $50 to re-establish service if payment or payment arrangements had not been arranged and agreed upon in writing prior to the service interruption.
-						</fo:block>
-						<fo:block space-after="4pt">
-							2.3 It is understood that any applicable federal, state or local taxes shall be added to each invoice for services or materials rendered under this Agreement. Client shall pay all such taxes unless a valid exemption state certificate is furnished to UPTIME SERVICES CORPORATION.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">2.4 Early Termination Fee &amp; Minimum Commitment Fee</fo:block>
-						<fo:block space-after="4pt">
-							Client may reduce or augment services at any time during the Agreement. Client agrees that they shall not be liable for less than 50% of the original contracted service amount. If, for any reason, this Agreement is terminated prematurely by Client, UPTIME SERVICES CORPORATION reserves the right to assess an Early Termination Fee equal to 50% of the originally contracted services multiplied by the amount of remaining months in the original Agreement.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">3. Coverage</fo:block>
-						<fo:block space-after="4pt">
-							Unless modified by a Statement of Service associated with this agreement, all contracted services will be provided to Client by UPTIME SERVICES CORPORATION during working hours. UPTIME SERVICES CORPORATION will make reasonable efforts to respond to emergency requests. The hours of operation will be published at https://www.uptimevoip.co or other websites.
+
+						<!-- Section 2: Term; Renewal; Termination; Suspension -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							2. TERM; RENEWAL; TERMINATION; SUSPENSION
 						</fo:block>
 						<fo:block space-after="4pt">
-							3.1 E911. UPTIME SERVICES CORPORATION is subject to FCC requirements to provide notifications of any E911 limitations that may be associated with UPTIME SERVICES CORPORATION's service. Such limitations and notices are made publicly available at https://www.uptimevoip.co/e911. Client agrees that they have reviewed and accept such limitations.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">4. Nondisclosure</fo:block>
-						<fo:block space-after="4pt">
-							4.1 Confidential Information. Except as provided in Section 4.2, as used in this Agreement, "Confidential Information" means any information furnished or disclosed, in whatever form or medium, by UPTIME SERVICES CORPORATION to Client relating to the business of UPTIME SERVICES CORPORATION, and includes, without limitation, contract terms, financial information, business procedures, processes, techniques, methods, ideas, discoveries, inventions, developments, records, product designs, source codes, product planning, trade secrets, customer lists, material samples, and the fact that UPTIME SERVICES CORPORATION and Client are negotiating or are parties to this Agreement, all of which is deemed confidential and proprietary.
+							<fo:inline font-weight="bold">2.1 Term.</fo:inline> This Agreement begins on the date signed and continues for <xsl:value-of select="/quote/contractTerm"/> from the Activation Date for each Service.
 						</fo:block>
 						<fo:block space-after="4pt">
-							4.2 Use of Confidential Information. UPTIME SERVICES CORPORATION and Client shall only use Confidential Information for the purpose of performing services under this Agreement, and shall make no use of the Confidential Information, in whole or in part, for any other purpose. Both parties agree to refrain from disclosing the Confidential Information to third parties, unless one of the parties has given its prior written authorization to the other. The parties further agree to take all reasonable steps to preserve the confidential and proprietary nature of the Confidential Information. However, if the parties are required by subpoena or other court order to disclose any of the Confidential Information, the party shall provide immediate notice of such request to the other party and shall use reasonable efforts to resist disclosure. If, in the absence of a protective order or the receipt of a waiver under this Agreement, the parties are legally required to disclose any Confidential Information, then the parties may disclose such information without liability under this Agreement.
+							<fo:inline font-weight="bold">2.2 Renewal.</fo:inline> Following the initial term, the Agreement renews month-to-month unless either party gives 60 days' written notice of non-renewal.
 						</fo:block>
 						<fo:block space-after="4pt">
-							4.3 Remedies for Breach of Nondisclosure. The Confidential Information protected by this Agreement is of a special character, such that money damages, although available, would not be sufficient to award or compensate for any unauthorized use or disclosure of the Confidential Information. The parties agree that injunctive and other equitable relief would be appropriate to prevent any such actual or threatened unauthorized use or disclosure.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">5. Ownership Of Work Product</fo:block>
-						<fo:block space-after="4pt">
-							5.1 General. All intellectual property rights associated with any ideas, concepts, techniques, processes or other work product created by UPTIME SERVICES CORPORATION during the course of performing the services shall belong exclusively to UPTIME SERVICES CORPORATION, and Client shall have no right or interest therein.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">6. Indemnity</fo:block>
-						<fo:block space-after="4pt">
-							6.1 Third Party Indemnification of UPTIME SERVICES CORPORATION. Client acknowledges that by entering into and performing its obligations under this Agreement and each Statement of Service, UPTIME SERVICES CORPORATION will not assume and shall not be exposed to the business and operational risks associated with Client's business, and Client therefore agrees to indemnify, defend and hold UPTIME SERVICES CORPORATION harmless from any and all third party claims, actions, damages, liabilities, costs and expenses (including attorneys' fees and expenses) arising out of or related to the conduct of Client's business except as a result of gross negligence on the part of UPTIME SERVICES CORPORATION.
+							<fo:inline font-weight="bold">2.3 Termination for Cause.</fo:inline> Either party may terminate for material breach that remains uncured 30 days after written notice (or 10 days for undisputed nonpayment).
 						</fo:block>
 						<fo:block space-after="4pt">
-							6.2 Procedures. All indemnification obligations under this Section 6 shall be subject to the following requirements: (a) the indemnified party shall provide the indemnifying party with prompt written notice of any claim; (b) the indemnified party shall permit the indemnifying party to assume and control the defense of any action upon the indemnifying party's written acknowledgment of the obligation to indemnify (unless, in the opinion of counsel of the indemnified party, such assumption would result in a material conflict of interest); and (c) the indemnifying party shall not enter into any settlement or compromise of any claim without the indemnified party's prior written consent, which shall not be unreasonably withheld. In addition, the indemnified party may, at its own expense, participate in its defense of any claim. In the event that the indemnifying party assumes the defense of any such claim, the indemnifying party is not liable for attorney's fees and costs incurred by the indemnified party.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">7. Representation And Warranties</fo:block>
-						<fo:block space-after="4pt">
-							7.1 UPTIME SERVICES CORPORATION represents and warrants that it (a) has the right, power and authority to enter into the Agreement and to fully perform all of the obligations hereunder, (b) will use commercially reasonable efforts to provide all services required of it under the Agreement in accordance with prevailing industry standards, and (c) owns or has acquired the requisite rights from third parties to the UPTIME SERVICES CORPORATION property.
+							<fo:inline font-weight="bold">2.4 Early Termination Fee (ETF).</fo:inline> Client may terminate for convenience before the end of the term by giving 60 days' written notice and paying an Early Termination Fee equal to 50% of the then-current MRC for the terminated Services multiplied by the number of months remaining in the term.
 						</fo:block>
 						<fo:block space-after="4pt">
-							7.2 UPTIME SERVICES CORPORATION does not manufacture hardware or commercial off-the-shelf (COTS) software covered under this Agreement. Any warranty provisions are passed through from the manufacturer and are subject to the manufacturer's limitations. Any labor supplied by UPTIME SERVICES CORPORATION is not covered under the terms of the manufacturer's warranty.
+							<fo:inline font-weight="bold">2.5 Suspension.</fo:inline> Provider may suspend Services immediately if: (a) an invoice is more than 30 days past due; (b) Provider suspects fraud or abuse; (c) Client violates the Acceptable Use Policy; or (d) suspension is required by law. Reconnection fee: $50 per event.
+						</fo:block>
+
+						<!-- Section 3: Statements of Service; Ordering; Changes -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							3. STATEMENTS OF SERVICE; ORDERING; CHANGES
 						</fo:block>
 						<fo:block space-after="4pt">
-							7.3 UPTIME SERVICES CORPORATION may provide equipment owned by UPTIME SERVICES CORPORATION and housed at Client's premises. Such equipment may include, but is not limited to routers, desktops, servers, software, and remote backup devices. Such equipment shall be treated with the same care and security as similar equipment owned by Client. Client shall be held liable for any damage or loss not covered by the manufacturer's warranty. If such loss or damage occurs, Client will be invoiced the current replacement cost of the equipment plus shipping and handling and related installation charges.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">8. Disclaimer Of Warranties; Limitation Of Damages</fo:block>
-						<fo:block space-after="4pt">
-							8.1 THE EXPRESS, BUT LIMITED, WARRANTY IN SECTION 7 ABOVE IS IN LIEU OF ALL OTHER WARRANTIES, EXPRESS, IMPLIED OR STATUTORY, REGARDING UPTIME SERVICES CORPORATION SERVICES. UPTIME SERVICES CORPORATION AND ITS AFFILIATES SPECIFICALLY DISCLAIM ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO ALL WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT AND ANY WARRANTIES ARISING FROM COURSE OF DEALING, COURSE OF PERFORMANCE OR TRADE USAGE.
+							<fo:inline font-weight="bold">3.1 Ordering.</fo:inline> This quote serves as a Statement of Service and is governed by this MSA.
 						</fo:block>
 						<fo:block space-after="4pt">
-							8.2 UPTIME SERVICES CORPORATION AND ITS AFFILIATES SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE OR CONSEQUENTIAL DAMAGES, OR FOR ANY LOST DATA, INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOST PROFITS, COSTS OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, BUSINESS INTERRUPTION ARISING FROM OR RELATING TO THIS AGREEMENT OR ARISING FROM OR RELATING TO THE USE OF THE SOFTWARE WHICH HAS BEEN MODIFIED BY ANYONE OTHER THAN UPTIME SERVICES CORPORATION, LOSS OF PROGRAMS, AND THE LIKE, THAT RESULT FROM THE USE OR INABILITY TO USE THE SERVICES OR FROM MISTAKES, OMISSIONS, INTERRUPTIONS, DELETION OF FILES OR DIRECTORIES, LOSS OF DATA, ERRORS, DEFECTS, DELAYS IN OPERATION, OR TRANSMISSION, OR ANY FAILURE OF PERFORMANCE, HOWEVER CAUSED AND UNDER ANY THEORY OF LIABILITY (INCLUDING NEGLIGENCE OR OTHER TORTS), TO THE EXTENT ALLOWED BY LAW, EVEN IF UPTIME SERVICES CORPORATION HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+							<fo:inline font-weight="bold">3.2 Changes.</fo:inline> Client may request increases or decreases to quantities. Decreases take effect on the next billing cycle. If quantities are reduced to zero, the ETF in Section 2.4 applies.
+						</fo:block>
+
+						<!-- Section 4: Fees; Invoicing; Taxes; Disputes -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							4. FEES; INVOICING; TAXES; DISPUTES
 						</fo:block>
 						<fo:block space-after="4pt">
-							8.3 CLIENT ACKNOWLEDGES AND AGREES THAT CLIENT HAS RELIED ON NO WARRANTIES EXCEPT THE LIMITED EXPRESS WARRANTY IN SECTION 7.
+							<fo:inline font-weight="bold">4.1 Invoicing.</fo:inline> Provider invoices MRCs monthly in advance and usage/one-time fees in arrears. Unless otherwise stated, invoices are due Net 15 from the invoice date. Client must maintain an automated payment method (ACH or credit card) on file.
 						</fo:block>
 						<fo:block space-after="4pt">
-							8.4 Client agrees that the total liability of UPTIME SERVICES CORPORATION and its affiliates and the sole remedy of Client and any End User for any claims regarding UPTIME SERVICES CORPORATION services is limited to Client's right to terminate this Agreement. Further, should a court nonetheless find that remedy is not exclusive or that UPTIME SERVICES CORPORATION is for any reason nonetheless liable for money damages, the cumulative liability in connection with this Agreement, whether in contract, tort or otherwise, shall not exceed the amount paid to UPTIME SERVICES CORPORATION under this Agreement during the three months preceding the events giving rise to such liability. The existence of more than one claim shall not enlarge that limitation of liability.
+							<fo:inline font-weight="bold">4.2 Late Fees.</fo:inline> Undisputed past-due amounts accrue a late charge of 1.5% per month (or the maximum allowed by law). Provider may suspend Services per Section 2.5. Reconnection fee: $50.
 						</fo:block>
 						<fo:block space-after="4pt">
-							8.5 Except as expressly provided in the Agreement, Client acknowledges that (a) UPTIME SERVICES CORPORATION is in no manner responsible for any action or inaction of any third party; (b) UPTIME SERVICES CORPORATION has not represented that the services shall be uninterrupted, error free, or without delay; and (c) UPTIME SERVICES CORPORATION does not and cannot control the flow of data through the Internet, and such flow depends in large part on the performance of third parties whose actions or inaction can, at times, produce situations in which connections to the Internet (or portions thereof) may be impaired or disrupted. ACCORDINGLY, CLIENT ACKNOWLEDGES THAT UPTIME SERVICES CORPORATION DISCLAIMS ALL LIABILITY RELATED TO EVENTS OUTSIDE OF OUR CONTROL AND/OR IN THE CONTROL OF THIRD PARTIES, AND CLIENT SHALL HAVE NO RIGHT TO RELY UPON ANY REPRESENTATION OR WARRANTY OF ANY THIRD PARTY IN RESPECT TO THE SERVICES. Further, Client acknowledges that, in providing the services, UPTIME SERVICES CORPORATION shall necessarily rely upon information, instructions, and services from Client, its administrator, employees and agents, and other third parties providing computer and communications hardware, software, and Internet services. Except as expressly provided in the Agreement, Client fully assumes the risk associated with errors in such information, instructions, and services.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">9. Non Solicitation Of Employees</fo:block>
-						<fo:block space-after="4pt">
-							Client acknowledges that UPTIME SERVICES CORPORATION has a substantial investment in its employees that provide services to Client under this Agreement and that such employees are subject to UPTIME SERVICES CORPORATION's control and supervision. In consideration of this investment, Client agrees not to solicit, hire, employ, retain, or contract with any employee of UPTIME SERVICES CORPORATION, without first receiving UPTIME SERVICES CORPORATION's written consent. If any employee involved with the delivering of these services terminates his or her employment with UPTIME SERVICES CORPORATION (regardless of the reason for termination), and is employed by Client (or any affiliate or subsidiary of Client) in any capacity either during the term of this agreement or within a 6 month period thereafter, Client shall immediately pay UPTIME SERVICES CORPORATION an amount equal to 50% of the then current yearly salary or wage paid by UPTIME SERVICES CORPORATION to such employee.
-						</fo:block>
-						<fo:block font-weight="bold" space-after="2pt">10. General Provisions</fo:block>
-						<fo:block space-after="4pt">
-							10.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties with respect to the subject hereof and supersedes all prior proposals, agreements, negotiations, correspondence, demonstrations, and other communications, whether written or oral, between UPTIME SERVICES CORPORATION and Client. No modification or waiver of any provision hereof shall be effective unless made in writing signed by both UPTIME SERVICES CORPORATION and Client.
+							<fo:inline font-weight="bold">4.3 Billing Disputes.</fo:inline> Client must submit any invoice dispute in writing within 30 days of invoice receipt. Client must pay all undisputed amounts when due.
 						</fo:block>
 						<fo:block space-after="4pt">
-							10.5 Severability. If any provision hereof is determined in any proceeding binding upon the parties hereto to be invalid or unenforceable, that provision shall be deemed severed from the remainder of the Agreement, and the remaining provisions of the Agreement shall continue in full force and effect.
+							<fo:inline font-weight="bold">4.4 Taxes.</fo:inline> Client is responsible for all applicable taxes, regulatory fees, assessments, and pass-through surcharges, including USF, E911/988, and similar assessments, except for taxes on Provider's net income. Valid exemption certificates must be provided prior to the invoice date.
+						</fo:block>
+
+						<!-- Section 5: Service Levels; Support; Maintenance -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							5. SERVICE LEVELS; SUPPORT; MAINTENANCE
 						</fo:block>
 						<fo:block space-after="4pt">
-							10.6 Force Majeure. Neither party shall be liable hereunder by reason of any failure or delay in the performance of its obligations hereunder (except for the obligation for the payment of money) on account of any cause that is beyond the reasonable control of such party.
+							<fo:inline font-weight="bold">5.1 Support.</fo:inline> Provider offers support during Business Hours (Monday-Friday, 8 AM - 6 PM Eastern, excluding holidays) via channels listed at uptimevoip.co/support.
 						</fo:block>
 						<fo:block space-after="4pt">
-							10.7 Applicable Law and Venue. This Agreement shall be governed and construed in all respects in accordance with the laws of the State of Michigan. Client agrees it is subject to personal jurisdiction of the courts in Midland County, Michigan, and any dispute arising out of this Agreement requiring adjudication by a court of law shall be filed and heard in the venue of Midland County, Michigan.
+							<fo:inline font-weight="bold">5.2 SLA.</fo:inline> The Service Level Agreement at uptimevoip.co/sla applies to covered Services. Service credits are the sole monetary remedy for SLA claims.
 						</fo:block>
 						<fo:block space-after="4pt">
-							10.8 Notices. Except where provided otherwise, notices hereunder shall be in writing and shall be deemed to have been fully given and received when mailed by registered or certified mail, return receipt requested, postage prepaid, and properly addressed to the offices of the respective parties as specified in the first paragraph of this Agreement, or at such address as the parties may later specify in writing for such purposes. The foregoing shall apply regardless of whether such mail is accepted or unclaimed.
+							<fo:inline font-weight="bold">5.3 Maintenance.</fo:inline> Provider may perform routine maintenance and upgrades. Provider will use reasonable efforts to schedule planned maintenance outside Business Hours and to provide prior notice.
+						</fo:block>
+
+						<!-- Section 6: E911 and MLTS Requirements -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							6. E911 AND MLTS REQUIREMENTS
 						</fo:block>
 						<fo:block space-after="4pt">
-							10.9 Assignment. This Agreement shall inure to the benefit of, and be binding upon, any successor to or purchaser of UPTIME SERVICES CORPORATION whether by contract, merger or operation of law. Except for this limited right of assignment, neither party shall assign this Agreement or any right or interest under this Agreement, nor delegate any work or obligation to be performed under this Agreement, without the other party's prior written consent. Any attempted assignment or delegation in contravention of this provision shall be void and ineffective.
+							<fo:inline font-weight="bold">6.1 Limitations.</fo:inline> VoIP 911 has inherent limitations, including dependence on power and broadband. VoIP 911 may be unavailable during power or Internet outages. Full E911 Policy available at uptimevoip.co/policies/e911.
 						</fo:block>
 						<fo:block space-after="4pt">
-							10.10 Arbitration. Except for the right of either party to apply to a court of competent jurisdiction for a Temporary Restraining Order, Preliminary Injunction, or other equitable relief to preserve the status quo or prevent irreparable harm pending the selection and confirmation of the arbitrator, any and all disputes, controversies, or claims arising out of or relating to this Agreement or a breach thereof shall be submitted to and finally resolved by arbitration under the rules of the American Arbitration Association (AAA) then in effect. There shall be one arbitrator, and such arbitrator shall be chosen by mutual agreement of the parties or in accordance with AAA rules. The findings of the arbitrator shall be final and binding on the parties, and may be entered in any court of competent jurisdiction for enforcement. Legal fees shall be awarded to the prevailing party in the arbitration.
+							<fo:inline font-weight="bold">6.2 Client Duties.</fo:inline> Client must: (a) provide and maintain a dispatchable location for each endpoint and update within 1 business day of changes; (b) ensure direct 911 dialing is available; (c) place E911 warning labels on/near devices; (d) train users on VoIP 911 limitations; (e) test routing using 933 before go-live.
 						</fo:block>
 						<fo:block space-after="4pt">
-							10.11 Liquidated Damages. Client acknowledges that UPTIME SERVICES CORPORATION is relying on Client to perform as promised under this agreement and therefore makes significant investments in time, equipment, and personnel accordingly. To protect this investment, UPTIME SERVICES CORPORATION has the right to collect liquidated damages in case of breach by Client. If Client fails to perform as promised under this agreement, Client agrees to pay liquidated damages in an amount equal to the remainder of contract term.
+							<fo:inline font-weight="bold">6.3 Allocation of Risk.</fo:inline> Client assumes the risk of inaccurate location information and power/broadband failures not caused by Provider's willful misconduct.
+						</fo:block>
+
+						<!-- Section 7: Acceptable Use; Robocall Mitigation -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							7. ACCEPTABLE USE; ROBOCALL MITIGATION; STIR/SHAKEN
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">7.1 Acceptable Use.</fo:inline> Client will comply with all applicable laws relating to outbound calling and messaging, including caller ID rules, Do-Not-Call, and anti-spam policies. Prohibited uses include unlawful robocalls, illegal spoofing, traffic pumping, and fraudulent traffic. Full policy at uptimevoip.co/policies/aup.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">7.2 Robocall Mitigation.</fo:inline> Provider implements call authentication (STIR/SHAKEN) and robocall mitigation. Client will cooperate, including providing accurate caller ID and KYC documentation upon request.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">7.3 Enforcement.</fo:inline> Provider may block, rate-limit, or suspend traffic reasonably believed to be unlawful, fraudulent, or network-threatening.
+						</fo:block>
+
+						<!-- Section 8: Numbering; Porting (LNP) -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							8. NUMBERING; PORTING (LNP)
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">8.1 Number License.</fo:inline> Provider-assigned numbers are licensed, not sold. Client may port them out if permitted by law and the carrier. Full policy at uptimevoip.co/policies/porting.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">8.2 Port-In/Out.</fo:inline> Porting requires valid LOA and CSR/BTN information. Provider will not unreasonably delay valid port-out requests. Client is responsible for charges until port completes.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">8.3 After Termination.</fo:inline> Provider may reclaim numbers not ported within 30 days after termination.
+						</fo:block>
+
+						<!-- Section 9: Fraud Prevention; Security -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							9. FRAUD PREVENTION; SECURITY; ABNORMAL USAGE
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">9.1 Client Security.</fo:inline> Client must secure credentials, endpoints, and network elements (strong passwords, firmware updates, firewall rules, 2FA).
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">9.2 Fraud/Abuse.</fo:inline> Client is responsible for all use of Services, authorized or not, including fraudulent or unauthorized usage, unless caused by Provider's willful misconduct. Provider may set spend limits or call destination blocks and may suspend abnormal usage.
+						</fo:block>
+
+						<!-- Section 10: Equipment; Title; Risk of Loss -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							10. EQUIPMENT; TITLE; RISK OF LOSS
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">10.1 Title.</fo:inline> Title to purchased Equipment passes to Client upon full payment. Rented/loaned Equipment remains Provider's property.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">10.2 Risk of Loss.</fo:inline> Risk of loss transfers to Client upon delivery. Client must return rented Equipment within 30 days of termination in good condition or pay a non-return fee.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">10.3 Warranties.</fo:inline> Provider does not manufacture Equipment and passes through manufacturer warranties to the extent permitted. Labor provided by Provider is not covered by manufacturer warranties.
+						</fo:block>
+
+						<!-- Section 11: Confidentiality -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							11. CONFIDENTIALITY
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">11.1 Obligations.</fo:inline> Each party will use the other's Confidential Information only to perform under this Agreement and will protect it with at least the same care used for its own similar information (but not less than reasonable care).
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">11.2 Compelled Disclosure.</fo:inline> If legally compelled to disclose, the receiving party will give prompt notice and reasonable cooperation to seek protective treatment.
+						</fo:block>
+
+						<!-- Section 12: Intellectual Property; License -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							12. INTELLECTUAL PROPERTY; LICENSE
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">12.1 Ownership.</fo:inline> Provider owns all right, title, and interest in the Services, underlying software, configurations, and any work product developed while performing the Services.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">12.2 License to Client.</fo:inline> Provider grants Client a non-exclusive, non-transferable license during the term to use Provider materials solely to receive and use the Services.
+						</fo:block>
+
+						<!-- Section 13: Data; Privacy; CPNI; Call Recording -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							13. DATA; PRIVACY; CPNI; CALL RECORDING
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">13.1 Data Use.</fo:inline> Provider may process Client data (including CDRs and diagnostic logs) to deliver, support, secure, and improve Services. Provider will implement reasonable measures to protect such data.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">13.2 CPNI.</fo:inline> To the extent Provider is subject to CPNI rules, Provider will handle CPNI in accordance with applicable law.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">13.3 Call Recording.</fo:inline> If Client enables recording or transcription, Client is solely responsible for compliance with all applicable consent and notification laws.
+						</fo:block>
+
+						<!-- Section 14: Representations and Warranties -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							14. REPRESENTATIONS AND WARRANTIES
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">14.1 Mutual.</fo:inline> Each party represents it has the power and authority to enter into and perform under this Agreement.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">14.2 Provider.</fo:inline> Provider will perform Services in a workmanlike manner consistent with prevailing industry standards.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">14.3 Disclaimer.</fo:inline> EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, THE SERVICES AND EQUIPMENT ARE PROVIDED "AS IS" AND PROVIDER DISCLAIMS ALL OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+						</fo:block>
+
+						<!-- Section 15: Indemnification -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							15. INDEMNIFICATION
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">15.1 Client Indemnity.</fo:inline> Client will defend, indemnify, and hold harmless Provider from third-party claims, damages, fines, and costs (including attorneys' fees) arising from (a) Client's business operations or use of Services in violation of this Agreement or law, or (b) Client's failure to meet obligations in Sections 6, 7, 8, 9, or 13, except to the extent caused by Provider's gross negligence or willful misconduct.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">15.2 Provider IP Indemnity.</fo:inline> Provider will defend and indemnify Client from third-party claims that the Services infringe a U.S. patent, copyright, or trade secret, provided the claim does not arise from combinations, modifications, or use not provided by Provider.
+						</fo:block>
+
+						<!-- Section 16: Limitation of Liability -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							16. LIMITATION OF LIABILITY
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">16.1 Exclusions.</fo:inline> NEITHER PARTY IS LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, PUNITIVE, EXEMPLARY, OR CONSEQUENTIAL DAMAGES, OR FOR LOST PROFITS/REVENUE, LOSS OF DATA, OR BUSINESS INTERRUPTION, EVEN IF ADVISED OF THE POSSIBILITY.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">16.2 Cap.</fo:inline> EXCEPT FOR (i) CLIENT'S PAYMENT OBLIGATIONS; (ii) BREACH OF CONFIDENTIALITY; (iii) IP INDEMNITY; AND (iv) GROSS NEGLIGENCE OR WILLFUL MISCONDUCT, EACH PARTY'S TOTAL LIABILITY WILL NOT EXCEED THE FEES PAID OR PAYABLE FOR THE AFFECTED SERVICES IN THE TWELVE (12) MONTHS PRECEDING THE EVENT.
+						</fo:block>
+
+						<!-- Section 17: Non-Solicitation -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							17. NON-SOLICITATION
+						</fo:block>
+						<fo:block space-after="4pt">
+							During the term and for twelve (12) months thereafter, Client will not solicit or hire any Provider employee who materially participated in the delivery of Services without Provider's written consent. If violated, Client will pay a placement fee equal to 50% of the employee's then-current annual base salary.
+						</fo:block>
+
+						<!-- Section 18: General Provisions -->
+						<fo:block font-weight="bold" font-size="9pt" space-after="4pt" color="{$uptime_blue}">
+							18. GENERAL PROVISIONS
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.1 Governing Law.</fo:inline> This Agreement is governed by the laws of the State of Michigan, without regard to conflicts of laws principles.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.2 Dispute Resolution.</fo:inline> Any dispute arising out of or relating to this Agreement will be resolved by binding arbitration administered by the American Arbitration Association (AAA) under its Commercial Arbitration Rules by a single arbitrator. The seat is Midland County, Michigan. Either party may seek temporary injunctive relief in court to preserve the status quo pending arbitration. Class actions and class arbitrations are not permitted.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.3 Venue.</fo:inline> For actions to enforce arbitration awards or for temporary relief, the parties consent to exclusive jurisdiction and venue of state or federal courts in Midland County, Michigan.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.4 Notices.</fo:inline> Notices must be in writing to: Provider at billing@uptimevoip.co and 5444 N Coleman RD, STE D, Coleman MI 48618; Client at <xsl:value-of select="/quote/createdByEmail"/> and <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine1"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/city"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/state"/> <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/zip"/>.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.5 Assignment.</fo:inline> Client may not assign without Provider's consent. Provider may assign to an affiliate or in connection with a merger or sale of assets.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.6 Force Majeure.</fo:inline> Neither party is liable for delay or failure to perform (other than payment obligations) due to events beyond its reasonable control.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.7 Entire Agreement.</fo:inline> This Agreement with its Statements of Service constitutes the entire agreement and supersedes prior discussions. Amendments must be in writing signed by both parties.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.8 Severability.</fo:inline> If any provision is unenforceable, the remainder remains in effect.
+						</fo:block>
+						<fo:block space-after="4pt">
+							<fo:inline font-weight="bold">18.9 Independent Contractors.</fo:inline> The parties are independent contractors; no agency, partnership, or joint venture is created.
 						</fo:block>
 					</fo:block>
 
