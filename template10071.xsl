@@ -101,7 +101,7 @@
 							</fo:table-cell>
 							<!-- Right: Gray Box with Customer Info + ESTIMATE -->
 							<fo:table-cell padding="5pt">
-								<fo:block background-color="#E8E8E8" padding="10pt">
+								<fo:block background-color="#E8E8E8" padding="10pt" fox:border-radius="8pt">
 									<fo:block font-size="28pt" font-weight="bold" text-align="right" margin-bottom="8pt">
 										ESTIMATE
 									</fo:block>
@@ -180,7 +180,7 @@
 							</fo:block>
 
 							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
-								border="0.5pt solid #CCCCCC">
+								border="0.5pt solid #CCCCCC" fox:border-radius="8pt" overflow="hidden">
 								<fo:table-column column-width="35%"/>
 								<fo:table-column column-width="15%"/>
 								<fo:table-column column-width="10%"/>
@@ -356,31 +356,38 @@
 									<!-- Tax Line Items -->
 									<xsl:for-each select=".//quoteChargeDetails/taxLineItem/lineItems[generate-id()=generate-id(key('quoteReclineItems-by-description', description)[1])]">
 										<fo:table-row keep-together.within-page="always">
-											<fo:table-cell number-columns-spanned="5" padding="6pt" text-align="right">
+											<fo:table-cell number-columns-spanned="5" padding="2pt" text-align="right">
 												<fo:block><xsl:value-of select="description"/>:</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="6pt" text-align="right">
+											<fo:table-cell padding="2pt" text-align="right">
 												<fo:block>
 													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number(sum(key('quoteReclineItems-by-description',description)/taxAmount), '#,##0.00','dollar'))"/>
 												</fo:block>
 											</fo:table-cell>
 										</fo:table-row>
 									</xsl:for-each>
-
-									<!-- Monthly Total -->
-									<fo:table-row keep-together.within-page="always">
-										<fo:table-cell number-columns-spanned="5" padding="8pt" text-align="right"
-											background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
-											<fo:block font-weight="bold" font-size="11pt">Monthly Fee Total:</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="8pt" text-align="right" background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
-											<fo:block font-weight="bold" font-size="11pt">
-												<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))"/>
-											</fo:block>
-										</fo:table-cell>
-									</fo:table-row>
 								</fo:table-body>
 							</fo:table>
+
+							<!-- Monthly Fee Total Box -->
+							<fo:block margin-top="10pt" background-color="#F5F5F5" padding="8pt" fox:border-radius="8pt">
+								<fo:table width="100%" table-layout="fixed">
+									<fo:table-column column-width="83.33%"/>
+									<fo:table-column column-width="16.67%"/>
+									<fo:table-body>
+										<fo:table-row>
+											<fo:table-cell text-align="right">
+												<fo:block font-weight="bold" font-size="11pt">Monthly Fee Total:</fo:block>
+											</fo:table-cell>
+											<fo:table-cell text-align="right">
+												<fo:block font-weight="bold" font-size="11pt">
+													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))"/>
+												</fo:block>
+											</fo:table-cell>
+										</fo:table-row>
+									</fo:table-body>
+								</fo:table>
+							</fo:block>
 						</fo:block>
 					</xsl:if>
 
@@ -393,7 +400,7 @@
 							</fo:block>
 
 							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
-								border="0.5pt solid #CCCCCC">
+								border="0.5pt solid #CCCCCC" fox:border-radius="8pt" overflow="hidden">
 								<fo:table-column column-width="35%"/>
 								<fo:table-column column-width="15%"/>
 								<fo:table-column column-width="10%"/>
@@ -529,31 +536,38 @@
 									<!-- Tax Line Items -->
 									<xsl:for-each select=".//quoteChargeDetails/taxLineItem/lineItems[generate-id()=generate-id(key('quoteOneTimeLineItems-by-description', description)[1])]">
 										<fo:table-row keep-together.within-page="always">
-											<fo:table-cell number-columns-spanned="5" padding="6pt" text-align="right">
+											<fo:table-cell number-columns-spanned="5" padding="2pt" text-align="right">
 												<fo:block><xsl:value-of select="description"/>:</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="6pt" text-align="right">
+											<fo:table-cell padding="2pt" text-align="right">
 												<fo:block>
 													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number(sum(key('quoteOneTimeLineItems-by-description',description)/taxAmount), '#,##0.00','dollar'))"/>
 												</fo:block>
 											</fo:table-cell>
 										</fo:table-row>
 									</xsl:for-each>
-
-									<!-- One-Time Total -->
-									<fo:table-row keep-together.within-page="always">
-										<fo:table-cell number-columns-spanned="5" padding="8pt" text-align="right"
-											background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
-											<fo:block font-weight="bold" font-size="11pt">One-Time Total:</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="8pt" text-align="right" background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
-											<fo:block font-weight="bold" font-size="11pt">
-												<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))"/>
-											</fo:block>
-										</fo:table-cell>
-									</fo:table-row>
 								</fo:table-body>
 							</fo:table>
+
+							<!-- One-Time Total Box -->
+							<fo:block margin-top="10pt" background-color="#F5F5F5" padding="8pt" fox:border-radius="8pt">
+								<fo:table width="100%" table-layout="fixed">
+									<fo:table-column column-width="83.33%"/>
+									<fo:table-column column-width="16.67%"/>
+									<fo:table-body>
+										<fo:table-row>
+											<fo:table-cell text-align="right">
+												<fo:block font-weight="bold" font-size="11pt">One-Time Total:</fo:block>
+											</fo:table-cell>
+											<fo:table-cell text-align="right">
+												<fo:block font-weight="bold" font-size="11pt">
+													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))"/>
+												</fo:block>
+											</fo:table-cell>
+										</fo:table-row>
+									</fo:table-body>
+								</fo:table>
+							</fo:block>
 						</fo:block>
 					</xsl:if>
 
