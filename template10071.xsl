@@ -179,7 +179,7 @@
 								Monthly Fees
 							</fo:block>
 
-							<fo:block-container border="0.5pt solid #CCCCCC" fox:border-radius="8pt" overflow="hidden" padding="2pt" background-color="white">
+							<fo:block-container border="0.5pt solid #CCCCCC" fox:border-radius="8pt" overflow="hidden" background-color="white">
 								<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
 									border-collapse="separate">
 									<fo:table-column column-width="35%"/>
@@ -394,7 +394,7 @@
 								One-Time Charges
 							</fo:block>
 
-							<fo:block-container border="0.5pt solid #CCCCCC" fox:border-radius="8pt" overflow="hidden" padding="2pt" background-color="white">
+							<fo:block-container border="0.5pt solid #CCCCCC" fox:border-radius="8pt" overflow="hidden" background-color="white">
 								<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
 									border-collapse="separate">
 									<fo:table-column column-width="35%"/>
@@ -563,7 +563,7 @@
 
 					<!-- Summary Totals Box -->
 					<fo:block margin-top="20pt" keep-together.within-page="always">
-						<fo:block-container border="2pt solid {$uptime_blue}" fox:border-radius="8pt" overflow="hidden" padding="2pt" background-color="white">
+						<fo:block-container border="2pt solid {$uptime_blue}" fox:border-radius="8pt" overflow="hidden" background-color="white">
 							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}"
 								border-collapse="separate">
 								<fo:table-column column-width="33.33%"/>
