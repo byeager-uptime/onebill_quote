@@ -80,7 +80,7 @@
 
 		<!-- First Page Header -->
 		<fo:static-content flow-name="first-page-header">
-			<fo:block border-after-style="solid" border-after-width="0.5pt" border-after-color="#CCCCCC" padding-after="5pt">
+			<fo:block padding-after="5pt">
 				<fo:table width="100%" table-layout="fixed" font-family="{$font_family}">
 					<fo:table-column column-width="50%"/>
 					<fo:table-column column-width="50%"/>
@@ -136,7 +136,7 @@
 
 		<!-- Rest Pages Header (small logo only) -->
 		<fo:static-content flow-name="rest-page-header">
-			<fo:block border-after-style="solid" border-after-width="0.5pt" border-after-color="#CCCCCC" padding-after="5pt">
+			<fo:block padding-after="5pt">
 				<fo:external-graphic src="url({/quote/quoteBusinsessProfile/businessImageUrl})"
 					content-width="50px" content-height="scale-to-fit" scaling="uniform"/>
 			</fo:block>
@@ -174,7 +174,7 @@
 					<!-- Monthly Fees Section -->
 					<xsl:if test="$isRecurringPresent or $isBundlePresent">
 						<fo:block margin-top="15pt" margin-bottom="10pt">
-							<fo:block font-size="14pt" font-weight="bold" color="{$uptime_blue}" margin-bottom="25pt">
+							<fo:block font-size="14pt" font-weight="bold" color="{$uptime_blue}" margin-bottom="8pt">
 								Monthly Fees
 							</fo:block>
 
