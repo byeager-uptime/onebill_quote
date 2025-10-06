@@ -179,9 +179,9 @@
 								Monthly Fees
 							</fo:block>
 
-							<fo:block-container border="0.5pt solid #CCCCCC" fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt" overflow="hidden" background-color="white">
-								<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
-									border-collapse="separate">
+							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
+									border="0.5pt solid #CCCCCC" border-collapse="separate"
+									fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt">
 									<fo:table-column column-width="35%"/>
 								<fo:table-column column-width="15%"/>
 								<fo:table-column column-width="10%"/>
@@ -382,7 +382,6 @@
 									</fo:table-row>
 								</fo:table-body>
 							</fo:table>
-						</fo:block-container>
 						</fo:block>
 					</xsl:if>
 
@@ -394,9 +393,9 @@
 								One-Time Charges
 							</fo:block>
 
-							<fo:block-container border="0.5pt solid #CCCCCC" fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt" overflow="hidden" background-color="white">
-								<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
-									border-collapse="separate">
+							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
+									border="0.5pt solid #CCCCCC" border-collapse="separate"
+									fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt">
 									<fo:table-column column-width="35%"/>
 								<fo:table-column column-width="15%"/>
 								<fo:table-column column-width="10%"/>
@@ -557,15 +556,14 @@
 									</fo:table-row>
 								</fo:table-body>
 							</fo:table>
-						</fo:block-container>
 						</fo:block>
 					</xsl:if>
 
 					<!-- Summary Totals Box -->
 					<fo:block margin-top="20pt" keep-together.within-page="always">
-						<fo:block-container border="2pt solid {$uptime_blue}" fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt" overflow="hidden" background-color="white">
-							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}"
-								border-collapse="separate">
+						<fo:table width="100%" table-layout="fixed" font-family="{$font_family}"
+								border="2pt solid {$uptime_blue}" border-collapse="separate"
+								fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt">
 								<fo:table-column column-width="33.33%"/>
 							<fo:table-column column-width="33.33%"/>
 							<fo:table-column column-width="33.34%"/>
@@ -600,7 +598,6 @@
 								</fo:table-row>
 							</fo:table-body>
 						</fo:table>
-					</fo:block-container>
 					</fo:block>
 
 					<!-- Notes Section -->
