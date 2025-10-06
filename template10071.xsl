@@ -179,9 +179,10 @@
 								Monthly Fees
 							</fo:block>
 
-							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
-									border="0.5pt solid #CCCCCC" border-collapse="separate"
-									fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt">
+							<!-- Rounded outer wrapper for the table to ensure curved corners render in PDF -->
+								<fo:block border="0.5pt solid #CCCCCC" fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt" padding="0pt" background-color="#FFFFFF" overflow="hidden">
+								<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
+										border-collapse="separate">
 									<fo:table-column column-width="35%"/>
 								<fo:table-column column-width="15%"/>
 								<fo:table-column column-width="10%"/>
@@ -189,28 +190,28 @@
 								<fo:table-column column-width="15%"/>
 								<fo:table-column column-width="15%"/>
 
-								<fo:table-header>
-									<fo:table-row background-color="#F5F5F5" font-weight="bold">
-										<fo:table-cell padding="6pt" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Description</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Unit Price</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Qty</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Term</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Discount</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Total</fo:block>
-										</fo:table-cell>
-									</fo:table-row>
-								</fo:table-header>
+									<fo:table-header>
+										<fo:table-row font-weight="bold">
+											<fo:table-cell padding="0pt" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" margin-left="3pt">Description</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Unit Price</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Qty</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Term</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Discount</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right" margin-right="3pt">Total</fo:block>
+											</fo:table-cell>
+										</fo:table-row>
+									</fo:table-header>
 
 								<fo:table-body>
 									<!-- Recurring Line Items -->
@@ -368,20 +369,24 @@
 										</fo:table-row>
 									</xsl:for-each>
 
-									<!-- Monthly Fee Total -->
+									<!-- Monthly Fee Total (inset background to avoid squared corners) -->
 									<fo:table-row keep-together.within-page="always">
-										<fo:table-cell number-columns-spanned="5" padding="8pt" text-align="right"
-											background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
-											<fo:block font-weight="bold" font-size="11pt">Monthly Fee Total:</fo:block>
+										<fo:table-cell number-columns-spanned="5" padding="0pt" text-align="right" border-top="1pt solid #CCCCCC">
+											<fo:block background-color="#F5F5F5" padding="8pt" margin-left="3pt">
+												<fo:block font-weight="bold" font-size="11pt">Monthly Fee Total:</fo:block>
+											</fo:block>
 										</fo:table-cell>
-										<fo:table-cell padding="8pt" text-align="right" background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
-											<fo:block font-weight="bold" font-size="11pt">
-												<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))"/>
+										<fo:table-cell padding="0pt" text-align="right" border-top="1pt solid #CCCCCC">
+											<fo:block background-color="#F5F5F5" padding="8pt" margin-right="3pt">
+												<fo:block font-weight="bold" font-size="11pt">
+													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))"/>
+												</fo:block>
 											</fo:block>
 										</fo:table-cell>
 									</fo:table-row>
 								</fo:table-body>
-							</fo:table>
+								</fo:table>
+							</fo:block>
 						</fo:block>
 					</xsl:if>
 
@@ -393,9 +398,10 @@
 								One-Time Charges
 							</fo:block>
 
-							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
-									border="0.5pt solid #CCCCCC" border-collapse="separate"
-									fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt">
+							<!-- Rounded outer wrapper for the table to ensure curved corners render in PDF -->
+								<fo:block border="0.5pt solid #CCCCCC" fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt" padding="0pt" background-color="#FFFFFF" overflow="hidden">
+								<fo:table width="100%" table-layout="fixed" font-family="{$font_family}" font-size="9pt"
+										border-collapse="separate">
 									<fo:table-column column-width="35%"/>
 								<fo:table-column column-width="15%"/>
 								<fo:table-column column-width="10%"/>
@@ -403,28 +409,28 @@
 								<fo:table-column column-width="15%"/>
 								<fo:table-column column-width="15%"/>
 
-								<fo:table-header>
-									<fo:table-row background-color="#F5F5F5" font-weight="bold">
-										<fo:table-cell padding="6pt" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Description</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Unit Price</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Qty</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Term</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Discount</fo:block>
-										</fo:table-cell>
-										<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-											<fo:block>Total</fo:block>
-										</fo:table-cell>
-									</fo:table-row>
-								</fo:table-header>
+									<fo:table-header>
+										<fo:table-row font-weight="bold">
+											<fo:table-cell padding="0pt" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" margin-left="3pt">Description</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Unit Price</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Qty</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Term</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Discount</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right" margin-right="3pt">Total</fo:block>
+											</fo:table-cell>
+										</fo:table-row>
+									</fo:table-header>
 
 								<fo:table-body>
 									<!-- One-Time Line Items -->
@@ -542,62 +548,76 @@
 										</fo:table-row>
 									</xsl:for-each>
 
-									<!-- One-Time Total -->
+									<!-- One-Time Total (inset background to avoid squared corners) -->
 									<fo:table-row keep-together.within-page="always">
-										<fo:table-cell number-columns-spanned="5" padding="8pt" text-align="right"
-											background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
-											<fo:block font-weight="bold" font-size="11pt">One-Time Total:</fo:block>
+										<fo:table-cell number-columns-spanned="5" padding="0pt" text-align="right" border-top="1pt solid #CCCCCC">
+											<fo:block background-color="#F5F5F5" padding="8pt" margin-left="3pt">
+												<fo:block font-weight="bold" font-size="11pt">One-Time Total:</fo:block>
+											</fo:block>
 										</fo:table-cell>
-										<fo:table-cell padding="8pt" text-align="right" background-color="#F5F5F5" border-top="1pt solid #CCCCCC">
-											<fo:block font-weight="bold" font-size="11pt">
+										<fo:table-cell padding="0pt" text-align="right" border-top="1pt solid #CCCCCC">
+											<fo:block background-color="#F5F5F5" padding="8pt" margin-right="3pt">
+												<fo:block font-weight="bold" font-size="11pt">
+													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))"/>
+												</fo:block>
+											</fo:block>
+										</fo:table-cell>
+									</fo:table-row>
+								</fo:table-body>
+								</fo:table>
+							</fo:block>
+						</fo:block>
+					</xsl:if>
+
+					<!-- Summary Totals Box -->
+					<fo:block margin-top="20pt" keep-together.within-page="always">
+						<!-- Rounded wrapper block (card panel pattern) -->
+							<fo:block border="2pt solid {$uptime_blue}" fox:border-radius="8pt"
+									axf:border-radius="8pt" rx:corner-radius="8pt"
+									padding="0pt" background-color="#FFFFFF" overflow="hidden">
+							<fo:table width="100%" table-layout="fixed" font-family="{$font_family}"
+									border-collapse="separate">
+									<fo:table-column column-width="33.33%"/>
+								<fo:table-column column-width="33.33%"/>
+								<fo:table-column column-width="33.34%"/>
+								<fo:table-body>
+										<fo:table-row>
+											<fo:table-cell padding="0pt" text-align="center" border-right="1pt solid white">
+												<fo:block background-color="{$uptime_blue}" padding="8pt" margin-left="3pt" text-align="center">
+													<fo:block font-weight="bold" color="white" font-size="10pt">One-Time Charges</fo:block>
+												</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="center" border-right="1pt solid white">
+												<fo:block background-color="{$uptime_blue}" padding="8pt" text-align="center">
+													<fo:block font-weight="bold" color="white" font-size="10pt">Monthly Fees</fo:block>
+												</fo:block>
+											</fo:table-cell>
+											<fo:table-cell padding="0pt" text-align="center">
+												<fo:block background-color="{$uptime_blue}" padding="8pt" margin-right="3pt" text-align="center">
+													<fo:block font-weight="bold" color="white" font-size="10pt">Total Due at Signup</fo:block>
+												</fo:block>
+											</fo:table-cell>
+										</fo:table-row>
+									<fo:table-row>
+										<fo:table-cell padding="10pt" text-align="center" border-right="0.5pt solid #CCCCCC">
+											<fo:block font-size="16pt" font-weight="bold">
 												<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))"/>
+											</fo:block>
+										</fo:table-cell>
+										<fo:table-cell padding="10pt" text-align="center" border-right="0.5pt solid #CCCCCC">
+											<fo:block font-size="16pt" font-weight="bold">
+												<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))"/>
+											</fo:block>
+										</fo:table-cell>
+										<fo:table-cell padding="10pt" text-align="center" background-color="#F5F5F5">
+											<fo:block font-size="18pt" font-weight="bold" color="{$uptime_blue}">
+												<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($total, '#,##0.00','dollar'))"/>
 											</fo:block>
 										</fo:table-cell>
 									</fo:table-row>
 								</fo:table-body>
 							</fo:table>
 						</fo:block>
-					</xsl:if>
-
-					<!-- Summary Totals Box -->
-					<fo:block margin-top="20pt" keep-together.within-page="always">
-						<fo:table width="100%" table-layout="fixed" font-family="{$font_family}"
-								border="2pt solid {$uptime_blue}" border-collapse="separate"
-								fox:border-radius="8pt" axf:border-radius="8pt" rx:corner-radius="8pt">
-								<fo:table-column column-width="33.33%"/>
-							<fo:table-column column-width="33.33%"/>
-							<fo:table-column column-width="33.34%"/>
-							<fo:table-body>
-								<fo:table-row background-color="{$uptime_blue}">
-									<fo:table-cell padding="8pt" text-align="center" border-right="1pt solid white">
-										<fo:block font-weight="bold" color="white" font-size="10pt">One-Time Charges</fo:block>
-									</fo:table-cell>
-									<fo:table-cell padding="8pt" text-align="center" border-right="1pt solid white">
-										<fo:block font-weight="bold" color="white" font-size="10pt">Monthly Fees</fo:block>
-									</fo:table-cell>
-									<fo:table-cell padding="8pt" text-align="center">
-										<fo:block font-weight="bold" color="white" font-size="10pt">Total Due at Signup</fo:block>
-									</fo:table-cell>
-								</fo:table-row>
-								<fo:table-row>
-									<fo:table-cell padding="10pt" text-align="center" border-right="0.5pt solid #CCCCCC">
-										<fo:block font-size="16pt" font-weight="bold">
-											<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))"/>
-										</fo:block>
-									</fo:table-cell>
-									<fo:table-cell padding="10pt" text-align="center" border-right="0.5pt solid #CCCCCC">
-										<fo:block font-size="16pt" font-weight="bold">
-											<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))"/>
-										</fo:block>
-									</fo:table-cell>
-									<fo:table-cell padding="10pt" text-align="center" background-color="#F5F5F5">
-										<fo:block font-size="18pt" font-weight="bold" color="{$uptime_blue}">
-											<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,format-number($total, '#,##0.00','dollar'))"/>
-										</fo:block>
-									</fo:table-cell>
-								</fo:table-row>
-							</fo:table-body>
-						</fo:table>
 					</fo:block>
 
 					<!-- Notes Section -->
