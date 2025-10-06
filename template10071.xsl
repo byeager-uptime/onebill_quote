@@ -27,7 +27,7 @@
 
 	<!-- Main template -->
 	<xsl:template match="/">
-		<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+		<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
 
 			<!-- Page Layout Definitions -->
 			<fo:layout-master-set>
@@ -174,7 +174,8 @@
 					<!-- Monthly Fees Section -->
 					<xsl:if test="$isRecurringPresent or $isBundlePresent">
 						<fo:block margin-top="15pt" margin-bottom="10pt">
-							<fo:block font-size="14pt" font-weight="bold" color="{$uptime_blue}" margin-bottom="8pt">
+							<fo:block font-size="11pt" font-weight="bold" color="white" background-color="{$uptime_blue}"
+								padding="8pt" fox:border-radius="8pt" margin-bottom="8pt">
 								Monthly Fees
 							</fo:block>
 
@@ -386,7 +387,8 @@
 					<!-- One-Time Fees Section -->
 					<xsl:if test="$isNonRecurringPresent">
 						<fo:block margin-top="15pt" margin-bottom="10pt">
-							<fo:block font-size="14pt" font-weight="bold" color="{$uptime_blue}" margin-bottom="8pt">
+							<fo:block font-size="11pt" font-weight="bold" color="white" background-color="{$uptime_blue}"
+								padding="8pt" fox:border-radius="8pt" margin-bottom="8pt">
 								One-Time Charges
 							</fo:block>
 
@@ -558,7 +560,7 @@
 					<!-- Summary Totals Box -->
 					<fo:block margin-top="20pt" keep-together.within-page="always">
 						<fo:table width="100%" table-layout="fixed" font-family="{$font_family}"
-							border="2pt solid {$uptime_blue}">
+							border="2pt solid {$uptime_blue}" fox:border-radius="8pt" overflow="hidden">
 							<fo:table-column column-width="33.33%"/>
 							<fo:table-column column-width="33.33%"/>
 							<fo:table-column column-width="33.34%"/>
