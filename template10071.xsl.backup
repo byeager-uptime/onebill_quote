@@ -1,0 +1,2146 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:s="http://www.stylusstudio.com/xquery">
+	<xsl:decimal-format name="dollar" decimal-separator="."
+		grouping-separator="," />
+		<xsl:key name="quotelOneTimeineItems-by-description" match="quoteChargeDetails[eventType='ONE_TIME']/taxLineItem/lineItems[taxAmount!=0]"
+		use="description" />
+		<xsl:key name="quoteReclineItems-by-description" match="quoteChargeDetails[eventType='REC']/taxLineItem/lineItems[taxAmount!=0]"
+		use="description" />
+		<xsl:variable name="font_family"
+		select="'Verdana, Arial, Helvetica, sans-serif'" />
+		<xsl:template name="removeMinusSymbol">
+		<xsl:param name="amount" />
+		<xsl:choose>
+			<xsl:when test="$amount >= 0">
+				<xsl:value-of
+					select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($amount,'#,##0.00','dollar'))" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of
+					select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($amount*-1,'#,##0.00','dollar'))" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+		
+	<xsl:template match="/">
+		<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+			<fo:layout-master-set>
+				<fo:simple-page-master master-name="default-page" page-height="11in" page-width="8.5in" margin-left="0.3in"
+					margin-right="0.3in" margin-top="0in" margin-bottom="0.1in">
+					<fo:region-body margin-top="0.25in" margin-bottom="0.1in"/>
+					<fo:region-before extent="0cm"/>
+				</fo:simple-page-master>
+				
+				
+				
+				<fo:simple-page-master master-name="first-page" page-height="11in" page-width="8.5in" margin-left="0.3in"
+					margin-right="0.3in" margin-top="0in" margin-bottom="0.1in">
+					<fo:region-body margin-top="0.25in" margin-bottom="0.1in"/>
+					<fo:region-before extent="0cm"/>
+				</fo:simple-page-master>
+				
+				</fo:layout-master-set>
+				
+			<fo:page-sequence master-reference="default-page">
+				
+		
+				
+				<fo:static-content flow-name="xsl-region-before">
+					<!--<fo:block text-align="left">
+						<fo:external-graphic background="transparent"
+								width="50%" content-width="40%" height="50%" content-height="40%"
+								src="/home/vaishnavi/Customer_NoSub_FINAL.png" />
+								</fo:block> -->
+						<!-- Orsotel Logo-->
+						<!--<fo:block margin-left="-12px">
+						<fo:external-graphic background="transparent"
+						width="30%" content-width="scale-to-fit" 
+						content-height="scale-to-fit" src="url({/quote/quoteBusinsessProfile/businessImageUrl})" />
+					</fo:block>-->
+				</fo:static-content>
+				
+				
+				<fo:flow flow-name="xsl-region-body">
+					<fo:block>
+						<!-- Orsotel Logo-->
+						<fo:block margin-left="-12px">
+							<fo:external-graphic background="transparent"
+							width="30%" content-width="scale-to-fit" 
+							content-height="scale-to-fit" src="url({/quote/quoteBusinsessProfile/businessImageUrl})" />
+						</fo:block>
+						<fo:table table-layout="fixed" width="100%" border-style="none" 
+								font-family="{$font_family}" font-size="10px">	
+								<fo:table-column column-width="30%" />
+								<fo:table-column column-width="70%" />
+								<fo:table-body>
+									<fo:table-row>
+										<fo:table-cell padding-bottom="3px"	padding-left="3px" padding-right="3px" padding-top="3px">
+											
+											<fo:table width="85%" border-style="none" table-layout="fixed" font-family="{$font_family}" font-size="10px" background-color="#EBEBEB" margin-bottom="5px" margin-left="5px" margin-right="5px" margin-top="-10px"> 
+		
+													<fo:table-body>
+													<fo:table-row>
+														<fo:table-cell display-align="center" padding-bottom="7px"
+															padding-left="3px" padding-top="7px">
+															
+													<fo:block text-align="left" font-size="8px" 
+													font-family="{$font_family}">
+													<fo:block>
+														<fo:inline font-family="{$font_family}" font-weight="bold">
+															Customer
+														</fo:inline>
+													</fo:block>
+													<xsl:if test="/quote/quoteSubscriberProfile/subscriberName !=''">
+														<fo:block color="#171717">
+																<xsl:value-of select="/quote/quoteSubscriberProfile/subscriberName" />
+														</fo:block>
+														<fo:block color="#171717">
+															<xsl:value-of
+																select="/quote/quoteSubscriberProfile/billingAddress/addLine1" />
+														</fo:block>
+														<xsl:if
+															test="/quote/quoteSubscriberProfile/billingAddress/addLine2 !=''">
+															<fo:block color="#171717">
+																<xsl:value-of
+																	select="/quote/quoteSubscriberProfile/billingAddress/addLine2" />
+															</fo:block>
+														</xsl:if>
+														<xsl:if
+															test="/quote/quoteSubscriberProfile/billingAddress/county !=''">
+															<fo:block color="#171717">
+																<xsl:value-of
+																	select="/quote/quoteSubscriberProfile/billingAddress/county" />
+															</fo:block>
+														</xsl:if>
+														<fo:block color="#171717">
+															<xsl:value-of
+																select="/quote/quoteSubscriberProfile/billingAddress/city" />
+														</fo:block>
+														<fo:block color="#171717">
+															<xsl:value-of
+																select="concat(/quote/quoteSubscriberProfile/billingAddress/state,' ',/quote/quoteSubscriberProfile/billingAddress/zip)" />
+														</fo:block>
+														
+													</xsl:if>
+												</fo:block>
+												
+												<fo:block>
+													<fo:leader leader-pattern="space" />
+												</fo:block>
+												<fo:block text-align="left" font-size="8px" 
+													font-family="{$font_family}">
+														<fo:inline font-family="{$font_family}" font-weight="bold">
+															Date
+														</fo:inline>
+												</fo:block>
+												<fo:block text-align="left" font-size="8px" color="#171717">
+														<xsl:if test="/quote/quoteCreatedDate !=''">
+															<xsl:value-of select="/quote/quoteCreatedDate" />
+														</xsl:if>
+												</fo:block>		
+												
+														<fo:block>			
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														<fo:block text-align="left" font-size="8px"
+															font-family="{$font_family}">
+															<fo:block text-align="left">
+																<fo:inline font-family="{$font_family}" font-weight="bold">
+																	Sales Agent
+																</fo:inline>
+														</fo:block>
+															<fo:block color="#171717">
+																<fo:inline>
+																	<xsl:value-of select="/quote/createdBy" />
+																</fo:inline>
+															</fo:block>
+															<fo:block color="#171717">
+																<xsl:value-of select="/quote/createdByEmail" />
+															</fo:block>
+															<fo:block color="#171717">
+																<xsl:value-of select="/quote/quoteBusinsessProfile/telephoneNo" />
+															</fo:block>
+														</fo:block>	
+											
+												<fo:block>
+													<fo:leader leader-pattern="space" />
+												</fo:block>
+												<fo:block text-align="left" font-size="8px"
+												font-family="{$font_family}">
+												<fo:block>
+													<fo:inline font-family="{$font_family}" font-weight="bold">
+														<xsl:value-of select="/quote/quoteBusinsessProfile/businessName" />
+													</fo:inline>
+												</fo:block>
+												<fo:block color="#171717">
+													<xsl:value-of select="/quote/quoteBusinsessProfile/addLine1" />
+												</fo:block>
+												<xsl:if test="/quote/quoteBusinsessProfile/addLine2 !=''">
+													<fo:block color="#171717">
+														<xsl:value-of select="/quote/quoteBusinsessProfile/addLine2" />
+													</fo:block>
+												</xsl:if>
+												<xsl:if test="/quote/quoteBusinsessProfile/county !=''">
+													<fo:block color="#171717">
+														<xsl:value-of select="/quote/quoteBusinsessProfile/county" />
+													</fo:block>
+												</xsl:if>
+												<fo:block color="#171717">
+													<xsl:value-of select="/quote/quoteBusinsessProfile/city" />
+												</fo:block>
+												<fo:block color="#171717">
+													<xsl:value-of select="concat(/quote/quoteBusinsessProfile/state,' ',/quote/quoteBusinsessProfile/zip)" />
+												</fo:block>
+												
+											</fo:block>
+										</fo:table-cell>
+									</fo:table-row>
+								</fo:table-body>
+							</fo:table>		
+										
+							<fo:table width="90%" background-repeat="repeat" font-size="7px" font-family="{$font_family}">
+								<fo:table-body>
+									<fo:table-row>
+										<fo:table-cell background-repeat="repeat" display-align="center" text-align="left" padding-bottom="5px" padding-left="5px" padding-top="5px">
+														<fo:block color="#171717">
+															<fo:inline>Thank you for your interest in 
+															</fo:inline>
+															<fo:inline>
+																<xsl:value-of select="/quote/quoteBusinsessProfile/businessName"/>
+															</fo:inline>
+															<fo:inline>. If
+															you have any questions about your quote,
+															contact your Account Executive:
+															</fo:inline>																									
+														</fo:block>	
+														
+														<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														<fo:block>
+															<fo:inline font-family="{$font_family}" font-weight="bold">
+																	<xsl:value-of select="/quote/createdBy" />
+															</fo:inline>
+														</fo:block>
+														<fo:block color="#171717">
+															<xsl:value-of select="/quote/createdByEmail" />
+														</fo:block>
+														<fo:block color="#171717">
+															<xsl:value-of select="/quote/quoteBusinsessProfile/telephoneNo" />
+														</fo:block>
+													</fo:table-cell>
+												</fo:table-row>
+											</fo:table-body>
+										</fo:table>
+									</fo:table-cell>
+
+							<fo:table-cell padding-bottom="3px" padding-left="3px" padding-right="3px">
+								
+								<fo:table width="100%" background-repeat="repeat" font-size="18px" font-family="{$font_family}">
+									<fo:table-body>
+										<fo:table-row>
+											<fo:table-cell background-repeat="repeat"
+												display-align="center" text-align="center" padding-bottom="5px"
+												padding-left="5px" padding-right="5px" padding-top="-8px">
+												<fo:block font-family="{$font_family}" font-weight="bold">
+															<fo:inline>Your </fo:inline>
+															<fo:inline>
+															<xsl:value-of select="/quote/quoteBusinsessProfile/businessName" />
+															</fo:inline>
+															<fo:inline> Quote: #</fo:inline>
+															<xsl:if test="/quote/quoteNumber !=''">
+																<xsl:value-of select="/quote/quoteNumber" />
+															</xsl:if>										
+												</fo:block>	
+											</fo:table-cell>
+										</fo:table-row>
+									</fo:table-body>
+								</fo:table>
+
+								<!-- Recurring Total -->
+								<xsl:variable name="recGrossTotal"
+									select="sum(/quote/quoteLineItems/quoteChargeDetails[eventType='REC']/grossAmount) + sum(/quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails[eventType='REC']/grossAmount) + sum(/quote/quoteLineItems[bundleElementName!='']/netAmount)" />
+								<xsl:variable name="recTotalDiscount"
+									select="sum(/quote/quoteLineItems/quoteChargeDetails[eventType='REC']/discountAmount) + sum(/quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails[eventType='REC']/discountAmount) + sum(/quote/quoteLineItems[bundleElementName!='']/discountAmount)" />
+								<xsl:variable name="recTotalTax"
+									select="sum(/quote/quoteLineItems/quoteChargeDetails[eventType='REC']/taxAmount) + sum(/quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails[eventType='REC']/taxAmount) + sum(/quote/quoteLineItems[bundleElementName!='']/taxAmount)" />
+								<xsl:variable name="recSubTotal"
+									select="$recGrossTotal + $recTotalDiscount" />
+								<xsl:variable name="recTotal"
+									select="$recGrossTotal + $recTotalDiscount + $recTotalTax" />
+								<!-- Non-Recurring Total -->
+								<xsl:variable name="nonRecGrossTotal"
+									select="sum(/quote/quoteLineItems/quoteChargeDetails[eventType='ONE_TIME']/grossAmount) + sum(/quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails[eventType='ONE_TIME']/grossAmount)" />
+								<xsl:variable name="nonRecTotalTax"
+									select="sum(/quote/quoteLineItems/quoteChargeDetails[eventType='ONE_TIME']/taxAmount) + sum(/quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails[eventType='ONE_TIME']/taxAmount)" />	
+								<xsl:variable name="nonRecTotalDiscount"
+									select="sum(/quote/quoteLineItems/quoteChargeDetails[eventType='ONE_TIME']/discountAmount) + sum(/quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails[eventType='ONE_TIME']/discountAmount)" />
+								<xsl:variable name="nonRecSubTotal"
+									select="$nonRecGrossTotal + $nonRecTotalDiscount" />
+								<xsl:variable name="nonRecTotal"
+									select="$nonRecGrossTotal + $nonRecTotalDiscount + $nonRecTotalTax" />
+								
+								<xsl:variable name="isRecurringPresent"
+									select="/quote/quoteLineItems/quoteChargeDetails/eventType='REC' or /quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails/eventType='REC'" />
+								<xsl:variable name="isNonRecurringPresent"
+									select="/quote/quoteLineItems/quoteChargeDetails/eventType='ONE_TIME' or /quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails/eventType='ONE_TIME'" />
+								<xsl:variable name="isBundlePresent"
+									select="/quote/quoteLineItems/bundleElementName!=''" />
+								<!-- Total -->
+								<xsl:variable name="total" select="$recTotal + $nonRecTotal" />
+								
+								
+								<xsl:if test="$isNonRecurringPresent">
+									<!-- One-Time Only -->
+									
+									<fo:block margin="0pt" font-family="{$font_family}" font-size="12px">
+										<fo:inline color="#E87118" font-weight="bold">
+											One Time Charges
+										</fo:inline>	
+									</fo:block>
+									<fo:table width="100%" border-style="none" font-family="{$font_family}" font-size="10px">
+										<fo:table-column column-width="42%" />
+										<fo:table-column column-width="16%" />
+										<fo:table-column column-width="8%" />
+										<fo:table-column column-width="8%" />
+										<fo:table-column column-width="12%" />
+										<fo:table-column column-width="14%" />
+										
+											<fo:table-header>
+											<fo:table-row border-bottom-width=".5px" border-bottom-style="solid" border-bottom-color="black"
+												border-top-width=".5px" border-top-style="solid" border-top-color="black">
+												<fo:table-cell
+													display-align="center" text-align="left" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Description</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell
+													display-align="center" text-align="right" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Price</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell
+													display-align="center" text-align="right" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Qty</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell
+													display-align="center" text-align="right" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Term</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+													<fo:table-cell
+														display-align="center" text-align="right" padding-bottom="1px"
+														padding-left="1px" padding-right="1px" padding-top="1px">
+														<fo:block font-family="{$font_family}" font-size="8px"
+															color="#000" font-weight="bold">
+															<xsl:text>Discount</xsl:text>
+														</fo:block>
+													</fo:table-cell>
+												
+												<fo:table-cell
+													display-align="center" text-align="right" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Total</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+											</fo:table-row>
+										</fo:table-header>
+										<fo:table-body color="#171717">
+											
+														<xsl:for-each select="/quote/quoteLineItems/quoteChargeDetails[eventType='ONE_TIME']">
+														<fo:table-row border-bottom-width=".6px" border-bottom-style="solid" border-bottom-color="#F2F2F2"
+														keep-together.within-page="always" >
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="left">
+																	<fo:block>
+																	<xsl:choose>
+																		<xsl:when test = "../invoiceDescription">
+																			<fo:block font-size="8px">
+																				<xsl:value-of select="../invoiceDescription" />
+																			</fo:block>
+																			
+																		</xsl:when>
+																		<xsl:otherwise>
+																			<fo:block font-size="8px">
+																	<xsl:value-of select="../productName" />
+																</fo:block>
+																<fo:block font-size="7px" margin-top="2px">
+																	<xsl:value-of select="../pricePlanName" />
+																</fo:block>
+																		</xsl:otherwise>
+																	</xsl:choose>
+																</fo:block>
+<!--
+																<fo:block font-size="8px">
+																	<xsl:value-of select="../productName" />
+																</fo:block>
+																<fo:block font-size="7px" margin-top="2px">
+																	<xsl:value-of select="../pricePlanName" />
+																</fo:block>
+-->
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of
+																		select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol, format-number(unitGrossAmount, '#,##0.00','dollar'))" />/unit
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of select="format-number(../quantity,'#')" />
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of select="../term" />
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																	background-repeat="repeat" padding-bottom="5px"
+																	padding-left="1px" padding-right="1px" padding-top="5px"
+																	text-align="right">
+																	<fo:block font-size="8px">
+																		<xsl:choose>
+																			<xsl:when test="not(discountAmount>=0)">
+																				<xsl:call-template name="removeMinusSymbol">
+																					<xsl:with-param name="amount">
+																						<xsl:value-of select="discountAmount" />
+																					</xsl:with-param>
+																				</xsl:call-template>
+																			</xsl:when>
+																			<xsl:otherwise>
+																			</xsl:otherwise>
+																		</xsl:choose>		
+																	</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:variable name="a" select="grossAmount" />
+																	<xsl:variable name="b" select="discountAmount" />
+																	<fo:block font-size="8px">
+																		<xsl:value-of
+																			select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol, format-number($a + $b, '#,##0.00','dollar'))" />
+
+																	</fo:block>
+																</fo:block>
+															</fo:table-cell>
+														</fo:table-row>
+														</xsl:for-each>
+													
+											
+														<xsl:for-each select="/quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails[eventType='ONE_TIME']">	
+														<fo:table-row>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="left">										
+																	<fo:block font-size="8px">
+																		<xsl:value-of select="../productName" />
+																	</fo:block>
+																	<fo:block font-size="7px">
+																		<xsl:value-of select="../pricePlanName" />
+																	</fo:block> 
+																</fo:table-cell>	
+																
+																<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">	
+																	<fo:block font-size="8px" margin-left="8px">
+																		<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,unitGrossAmount)" />/unit
+																	</fo:block>
+																</fo:table-cell>
+															
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">	
+																<fo:block font-size="8px">
+																	<xsl:value-of select="format-number(../quantity,'#')" />
+																</fo:block>	
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of select="../term" />
+																</fo:block>
+															</fo:table-cell>
+															
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">	
+																	<fo:block font-size="8px">
+																			<xsl:choose>
+																				<xsl:when test="not(discountAmount>=0)">
+																					<xsl:call-template name="removeMinusSymbol">
+																						<xsl:with-param name="amount">
+																							<xsl:value-of select="discountAmount" />
+																						</xsl:with-param>
+																					</xsl:call-template>
+																				</xsl:when>
+																				<xsl:otherwise>
+																				</xsl:otherwise>
+																			</xsl:choose>
+																		</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">	
+																	<fo:block font-size="8px">
+																			<xsl:variable name="aa" select="grossAmount" />
+																			<xsl:variable name="bb" select="discountAmount" />
+																			<xsl:value-of
+																			select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol, format-number($aa + $bb, '#,##0.00','dollar'))" />
+																		</fo:block>
+															</fo:table-cell>
+														</fo:table-row>
+														</xsl:for-each>
+													
+										
+											<fo:table-row height="0px">
+												<fo:table-cell number-columns-spanned="2">
+													<fo:block />
+												</fo:table-cell>
+											</fo:table-row>
+										</fo:table-body>
+									</fo:table>
+
+									<fo:table width="100%" keep-together.within-page="always">
+										<fo:table-column column-width="100%"/>
+										<fo:table-body>
+											<fo:table-row>
+												<fo:table-cell>
+													<fo:block page-break-inside="avoid"
+														background-repeat="repeat"
+														padding-bottom="5px" padding-top="5px">
+														<fo:table width="100%">
+															<fo:table-column column-width="86%"/>
+															<fo:table-column column-width="14%"/>
+															<fo:table-body>
+																	<fo:table-row>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px"
+																				text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px">
+																				<xsl:text>SubTotal</xsl:text>
+																			</fo:block>	
+																		</fo:table-cell>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px"
+																				text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px">
+																					<xsl:value-of
+																						select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecSubTotal, '#,##0.00','dollar'))" />
+																			</fo:block>	
+																		</fo:table-cell>
+																	</fo:table-row>
+																	
+																<xsl:for-each select=".//quoteChargeDetails/taxLineItem/lineItems[generate-id()=generate-id(key('quotelOneTimeineItems-by-description', description)[1])]  ">
+							
+																	<fo:table-row>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" font-family="{$font_family}"
+																				text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px">
+																			<xsl:value-of select = "description" />
+																			</fo:block>	
+																		</fo:table-cell>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" font-family="{$font_family}"
+																				text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px">
+																				<xsl:value-of select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number(sum(key('quotelOneTimeineItems-by-description',description)/taxAmount), '#,##0.00','dollar'))" />
+																			</fo:block>	
+																		</fo:table-cell>															
+																	</fo:table-row>	
+																</xsl:for-each> 												
+																	
+																
+																 	<fo:table-row>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" font-family="{$font_family}"
+																				text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px" font-weight="bold">
+																				<xsl:text>One Time Total</xsl:text>
+																			</fo:block>	
+																		</fo:table-cell>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" font-family="{$font_family}"
+																				text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px" font-weight="bold">
+																				<xsl:value-of
+																					select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))" />
+																			</fo:block>	
+																		</fo:table-cell>															
+																	</fo:table-row>																	
+																</fo:table-body>
+															</fo:table>
+														</fo:block>
+													</fo:table-cell>
+												</fo:table-row>
+											</fo:table-body>
+										</fo:table>
+							
+								</xsl:if>
+								
+								<fo:block>
+									<fo:leader leader-pattern="space" />
+								</fo:block>
+								<xsl:if test="$isRecurringPresent or $isBundlePresent">
+
+									<!-- Recurring Only -->
+									<fo:block margin="0pt" font-family="{$font_family}" font-size="12px">
+										<fo:inline color="#03023A" font-weight="bold">
+										Monthly Charges
+										</fo:inline>
+									</fo:block>
+
+									<fo:table width="100%" border-style="none" font-family="{$font_family}" font-size="10px" >
+										<fo:table-column column-width="42%" />
+										<fo:table-column column-width="16%" />
+										<fo:table-column column-width="8%" />
+										<fo:table-column column-width="8%" />
+										<fo:table-column column-width="12%" />
+										<fo:table-column column-width="14%" />
+											<fo:table-header>
+											<fo:table-row border-bottom-width=".5px" border-bottom-style="solid" border-bottom-color="black"
+												border-top-width=".5px" border-top-style="solid" border-top-color="black">
+												<fo:table-cell
+													display-align="center" text-align="left" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Description</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell
+													display-align="center" text-align="right" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Price</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell
+													display-align="center" text-align="right" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Qty</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell
+													display-align="center" text-align="right" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Term</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+													<fo:table-cell
+														display-align="center" text-align="right" padding-bottom="1px"
+														padding-left="1px" padding-right="1px" padding-top="1px">
+														<fo:block font-family="{$font_family}" font-size="8px"
+															color="#000" font-weight="bold">
+															<xsl:text>Discount</xsl:text>
+														</fo:block>
+													</fo:table-cell>
+												
+												<fo:table-cell
+													display-align="center" text-align="right" padding-bottom="1px"
+													padding-left="1px" padding-right="1px" padding-top="1px">
+													<fo:block font-family="{$font_family}" font-size="8px" color="#000" font-weight="bold">
+														<xsl:text>Total</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+											</fo:table-row>
+											</fo:table-header>
+											
+											<fo:table-body color="#171717">
+											
+											<xsl:for-each select="/quote/quoteLineItems/quoteChargeDetails[eventType='REC']">
+														<fo:table-row border-bottom-width=".6px" border-bottom-style="solid" border-bottom-color="#F2F2F2" 
+														keep-together.within-page="always">
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="left">
+																<fo:block>
+																	<xsl:choose>
+																		<xsl:when test = "../invoiceDescription">
+																			<fo:block font-size="8px">
+																				<xsl:value-of select="../invoiceDescription" />
+																			</fo:block>
+																			
+																		</xsl:when>
+																		<xsl:otherwise>
+																			<fo:block font-size="8px">
+																	<xsl:value-of select="../productName" />
+																</fo:block>
+																<fo:block font-size="7px" margin-top="2px">
+																	<xsl:value-of select="../pricePlanName" />
+																</fo:block>
+																		</xsl:otherwise>
+																	</xsl:choose>
+																</fo:block>
+																
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of
+																		select="/quote/quoteBusinsessProfile/currencySymbol" />
+																	<xsl:value-of select="unitGrossAmount" />/unit
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of select="format-number(../quantity,'#')" />
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of select="../term" />
+																</fo:block>
+															</fo:table-cell>
+															
+																<fo:table-cell background-color="#FCFCFC"
+																	background-repeat="repeat" padding-bottom="5px"
+																	padding-left="1px" padding-right="1px" padding-top="5px"
+																	text-align="right">
+																	<fo:block font-size="8px">
+																		<xsl:choose>
+																			<xsl:when test="not(discountAmount>=0)">
+																				<xsl:call-template name="removeMinusSymbol">
+																					<xsl:with-param name="amount">
+																						<xsl:value-of select="discountAmount" />
+																					</xsl:with-param>
+																				</xsl:call-template>
+																			</xsl:when>
+																			<xsl:otherwise>
+																			</xsl:otherwise>
+																		</xsl:choose>		
+																	</fo:block>
+																</fo:table-cell>
+															
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:variable name="a" select="grossAmount" />
+																	<xsl:variable name="b" select="discountAmount" />
+																	<fo:block font-size="8px">
+																		<xsl:value-of
+																			select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol, format-number($a + $b, '#,##0.00','dollar'))" />
+																	</fo:block>
+																</fo:block>
+															</fo:table-cell>
+														</fo:table-row>
+														</xsl:for-each>
+													
+											<xsl:for-each select="/quote/quoteLineItems[bundleElementName!='']">
+															<fo:table-row border-bottom-width=".6px" border-bottom-style="solid" border-bottom-color="#F2F2F2" 
+														keep-together.within-page="always">
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="left">
+																<fo:block font-size="8px" >
+																	<xsl:value-of select="productName" />
+																</fo:block>
+																<fo:block font-size="7px" margin-top="2px">
+																	<xsl:value-of select="pricePlanName" />
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of
+																		select="/quote/quoteBusinsessProfile/currencySymbol" />
+																	<xsl:value-of select="grossAmount" />/unit
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of select="format-number(quantity,'#')" />
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of select="../term" />
+																</fo:block>
+															</fo:table-cell>
+																<fo:table-cell background-color="#FCFCFC"
+																	background-repeat="repeat" padding-bottom="5px"
+																	padding-left="1px" padding-right="1px" padding-top="5px"
+																	text-align="right">
+																	<fo:block font-size="8px">
+																		<xsl:choose>
+																			<xsl:when test="not(discountAmount>=0)">
+																				<xsl:call-template name="removeMinusSymbol">
+																					<xsl:with-param name="amount">
+																						<xsl:value-of select="discountAmount" />
+																					</xsl:with-param>
+																				</xsl:call-template>
+																			</xsl:when>
+																			<xsl:otherwise>
+																			</xsl:otherwise>
+																		</xsl:choose>		
+																	</fo:block>
+																</fo:table-cell>
+															
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:variable name="a" select="netAmount" />
+																	<xsl:variable name="b" select="discountAmount" />
+																	<fo:block font-size="8px">
+																		<xsl:value-of
+																			select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol, format-number($a + $b, '#,##0.00','dollar'))" />
+																	</fo:block>
+																</fo:block>
+															</fo:table-cell>
+														</fo:table-row>
+													
+														</xsl:for-each>
+													
+									
+										<xsl:for-each select="/quote/quoteLineItems/quoteAddOnLineItems/quoteChargeDetails[eventType='REC']">	
+														<fo:table-row>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="left">										
+																	<fo:block font-size="8px">
+																		<xsl:value-of select="../productName" />
+																	</fo:block>
+																	<fo:block font-size="7px">
+																		<xsl:value-of select="../pricePlanName" />
+																	</fo:block> 
+																</fo:table-cell>	
+																
+																<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">	
+																	<fo:block font-size="8px">
+																		<xsl:value-of select="concat(/quote/quoteBusinsessProfile/currencySymbol,unitGrossAmount)" />/unit
+																	</fo:block>
+																</fo:table-cell>
+															
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">	
+																<fo:block font-size="8px" >
+																	<xsl:value-of select="format-number(../quantity,'#')" />
+																</fo:block>	
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">
+																<fo:block font-size="8px">
+																	<xsl:value-of select="../term" />
+																</fo:block>
+															</fo:table-cell>
+															
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">	
+																	<fo:block font-size="8px" >
+																			<xsl:choose>
+																				<xsl:when test="not(discountAmount>=0)">
+																					<xsl:call-template name="removeMinusSymbol">
+																						<xsl:with-param name="amount">
+																							<xsl:value-of select="discountAmount" />
+																						</xsl:with-param>
+																					</xsl:call-template>
+																				</xsl:when>
+																				<xsl:otherwise>
+																				</xsl:otherwise>
+																			</xsl:choose>
+																		</fo:block>
+															</fo:table-cell>
+															<fo:table-cell background-color="#FCFCFC"
+																background-repeat="repeat" padding-bottom="5px"
+																padding-left="1px" padding-right="1px" padding-top="5px"
+																text-align="right">	
+																	<fo:block font-size="8px" >
+																			<xsl:variable name="aa" select="grossAmount" />
+																			<xsl:variable name="bb" select="discountAmount" />
+																			<xsl:value-of
+																			select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol, format-number($aa + $bb, '#,##0.00','dollar'))" />
+																		</fo:block>
+															</fo:table-cell>
+														</fo:table-row>
+											</xsl:for-each>		
+									
+											<fo:table-row height="0px">
+												<fo:table-cell number-columns-spanned="2">
+													<fo:block />
+												</fo:table-cell>
+											</fo:table-row>
+										</fo:table-body>
+									</fo:table>
+									
+									<fo:table width="100%" keep-together.within-page="always">
+										<fo:table-column column-width="100%"/>
+										<fo:table-body>
+											<fo:table-row>
+												<fo:table-cell>
+													<fo:block page-break-inside="avoid"
+														background-repeat="repeat"
+														padding-bottom="5px" padding-top="5px">
+														<fo:table width="100%">
+															<fo:table-column column-width="86%"/>
+															<fo:table-column column-width="14%"/>
+															<fo:table-body>
+																	<fo:table-row>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px">
+																				<xsl:text>SubTotal</xsl:text>
+																			</fo:block>	
+																		</fo:table-cell>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px">
+																					<xsl:value-of
+																						select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($recSubTotal, '#,##0.00','dollar'))" />
+																			</fo:block>	
+																		</fo:table-cell>
+																	</fo:table-row>
+																	
+															<xsl:for-each select=".//quoteChargeDetails/taxLineItem/lineItems[generate-id()=generate-id(key('quoteReclineItems-by-description', description)[1])]">
+																	<fo:table-row>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" font-family="{$font_family}" text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px">
+																			<xsl:value-of select = "description" />
+																			</fo:block>	
+																		</fo:table-cell>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" font-family="{$font_family}" text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px">
+																				
+																				<xsl:value-of
+																					select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number(sum(key('quoteReclineItems-by-description',description)/taxAmount), '#,##0.00','dollar'))" />
+																			</fo:block>	
+																		</fo:table-cell>															
+																	</fo:table-row>	
+																	
+																	</xsl:for-each> 	 												
+																	
+																	
+																	<fo:table-row>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" font-family="{$font_family}"
+																				text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px" font-weight="bold">
+																				<xsl:text>Monthly Fee Total</xsl:text>
+																			</fo:block>	
+																		</fo:table-cell>
+																		<fo:table-cell>
+																			<fo:block color="#000" font-size="8px" font-family="{$font_family}"
+																				text-align="right" padding-bottom="1px" padding-left="1px" padding-right="1px" padding-top="1px" font-weight="bold">
+																				<xsl:value-of
+																					select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))" />
+																			</fo:block>	
+																		</fo:table-cell>															
+																	</fo:table-row>			
+																									
+																</fo:table-body>
+															</fo:table>
+														</fo:block>
+													</fo:table-cell>
+												</fo:table-row>
+											</fo:table-body>
+										</fo:table>
+									
+								</xsl:if>							
+									<fo:block>
+										<fo:leader leader-pattern="space" />
+									</fo:block>
+									
+								<fo:table width="100%" background-repeat="repeat" keep-together.within-page="always"
+								 font-size="11px" font-family="{$font_family}">
+										<fo:table-column column-width="32%" />
+										<fo:table-column column-width="32%" />
+										<fo:table-column column-width="36%" />
+										<fo:table-body>
+											<fo:table-row
+											background-color="#EBEBEB">
+												<fo:table-cell border-width=".1px" border-style="solid" border-color="#FAFAFA"
+													display-align="center" text-align="center" padding-bottom="2px"
+													padding-left="2px" padding-right="2px" padding-top="2px">
+													<fo:block font-family="{$font_family}" color="#03023a" font-weight="bold">
+														<xsl:text>One Time Charges</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell border-width=".1px" border-style="solid" border-color="#FAFAFA"
+													display-align="center" text-align="center" padding-bottom="2px"
+													padding-left="2px" padding-right="2px" padding-top="2px">
+													<fo:block font-family="{$font_family}" color="#03023a" font-weight="bold">
+														<xsl:text>Monthly Fees</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell border-width=".1px" border-style="solid" border-color="#FAFAFA"
+													display-align="center" text-align="center" padding-bottom="2px"
+													padding-left="2px" padding-right="2px" padding-top="2px">
+													<fo:block font-family="{$font_family}" color="#03023a" font-weight="bold">
+														<xsl:text>Total Due at Signup</xsl:text>
+													</fo:block>
+												</fo:table-cell>
+										</fo:table-row>
+										<fo:table-row background-color="#EBEBEB">
+												<fo:table-cell border-width=".1px" border-style="solid" border-color="#FAFAFA"
+													display-align="center" text-align="center" padding-bottom="2px"
+													padding-left="2px" padding-right="2px" padding-top="2px">
+													<fo:block color="#000">
+														<xsl:value-of
+																select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($nonRecTotal, '#,##0.00','dollar'))" />
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell border-width=".1px" border-style="solid" border-color="#FAFAFA"
+													display-align="center" text-align="center" padding-bottom="2px"
+													padding-left="2px" padding-right="2px" padding-top="2px">
+													<fo:block color="#000">
+														<xsl:value-of
+																select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($recTotal, '#,##0.00','dollar'))" />
+													</fo:block>
+												</fo:table-cell>
+												<fo:table-cell border-width=".1px" border-style="solid" border-color="#FAFAFA"
+													display-align="center" text-align="center" padding-bottom="2px"
+													padding-left="2px" padding-right="2px" padding-top="2px">
+													<fo:block font-family="{$font_family}" color="#000" font-weight="bold">
+														<xsl:value-of
+																select="concat(' ',/quote/quoteBusinsessProfile/currencySymbol,format-number($total, '#,##0.00','dollar'))" />
+													</fo:block>
+												</fo:table-cell>
+										</fo:table-row>
+									</fo:table-body>
+								</fo:table>	
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>
+				<!-- is a non-breaking space ( &nbsp; )-->			
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<!--<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>-->
+				<xsl:if test="/quote/note !=''">
+								<fo:block font-size="8px" margin-left="6px" background-color="#EBEBEB"
+									font-family="{$font_family}">
+									<fo:block margin="3px">
+										<fo:inline font-family="{$font_family}">
+											<xsl:text>Notes: </xsl:text>
+										</fo:inline>
+										<fo:inline color="#171717">
+											<xsl:value-of select="/quote/note" />
+										</fo:inline>
+									</fo:block>
+								</fo:block>
+							</xsl:if>
+			    <!--<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>
+				<fo:block>
+					<xsl:text>&#xA0;</xsl:text>
+				</fo:block>-->
+				
+				
+				<fo:block text-align="left" font-size="8px" font-family="{$font_family}" margin-top="0px"  color="#171717">
+				<fo:block >
+								    
+				<fo:block>
+					Orders are subject to the terms of your signed agreement with Uptime VoIP. All quotes must be paid in full by the electronic payment method on file before equipment can be ordered.
+				</fo:block>
+			<fo:block>
+			<fo:leader leader-pattern="space" />
+			</fo:block>
+			<fo:block>
+			<fo:leader leader-pattern="space" />
+			</fo:block>
+			<fo:block>
+			<fo:leader leader-pattern="space" />
+			</fo:block>
+			<fo:table width="100%" border-style="none"
+											font-family="Verdana, Arial, Helvetica, sans-serif">
+											<fo:table-column column-width="60%" />
+											<fo:table-column column-width="40%" />
+											<fo:table-body>
+												<fo:table-row>
+													<fo:table-cell border-style="none"
+														border-width="2pt" padding="2pt" background-repeat="repeat"
+														display-align="center">
+														<fo:block border-top="solid">
+															<fo:inline font-size="8px">
+																<xsl:text>Signature</xsl:text>
+															</fo:inline>
+														</fo:block>
+													</fo:table-cell>
+													<fo:table-cell border-style="none"
+														border-width="2pt" padding="2pt" background-repeat="repeat"
+														display-align="center">
+														<fo:block border-top="solid">
+															<fo:inline font-size="8px">
+																<xsl:text>Date</xsl:text>
+															</fo:inline>
+														</fo:block>
+													</fo:table-cell>
+												</fo:table-row>
+											</fo:table-body>
+										</fo:table>
+						</fo:block>
+					</fo:block>
+					
+					
+					
+					</fo:block>
+		</fo:flow>
+	</fo:page-sequence>
+	
+		<fo:page-sequence master-reference="first-page">
+			
+		<fo:static-content flow-name="xsl-region-before">
+					<!--<fo:block text-align="left">
+						<fo:external-graphic background="transparent"
+								width="50%" content-width="40%" height="50%" content-height="40%"
+								src="/home/vaishnavi/Customer_NoSub_FINAL.png" />
+								</fo:block> -->
+						<!-- Orsotel Logo-->
+						<!--<fo:block margin-left="-12px">
+						<fo:external-graphic background="transparent"
+						width="30%" content-width="scale-to-fit" 
+						content-height="scale-to-fit" src="url({/quote/quoteBusinsessProfile/businessImageUrl})" />
+					</fo:block>-->
+				</fo:static-content>
+				
+				
+				<fo:flow flow-name="xsl-region-body">
+					<fo:block>
+						<!-- Orsotel Logo-->
+						<fo:block margin-left="-12px">
+							<fo:external-graphic background="transparent"
+							width="30%" content-width="scale-to-fit" 
+							content-height="scale-to-fit" src="url({/quote/quoteBusinsessProfile/businessImageUrl})" />
+						</fo:block>
+	
+	                                
+									
+									
+	
+	                       <fo:block margin-left="35px" text-align="left" font-size="25px"  color="#000000"  font-weight="bold" 
+							 font-family="NexaBold">
+							<xsl:text></xsl:text>
+							
+						    </fo:block>
+														<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	
+	
+	
+	
+							<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							
+							  <fo:block margin-left="55px"  text-align="left"  font-size="12px"  color="#000000"  
+							 font-family="NexaBold">
+							<xsl:text></xsl:text>
+							</fo:block>		
+							
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	       <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							  
+							  
+							  <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+	</fo:inline>
+	
+	
+	<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+	
+	
+	 </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline  font-weight="bold" > 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:block>
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+</fo:inline>
+ </fo:block>
+ 
+  </fo:block>
+					<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>		
+			
+			<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							
+							  <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">
+							<xsl:text></xsl:text>
+							</fo:block>		
+											
+											
+											<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>		
+			
+			<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							
+							  <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">
+							<xsl:text></xsl:text>
+							</fo:block>		
+							 
+	
+	
+	
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+	</fo:inline>
+	
+	
+	<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+	
+	
+	 </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline  font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline > 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:block>
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+</fo:inline>
+ </fo:block>
+ 
+  </fo:block>
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+	</fo:inline>
+	
+	
+	<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+	
+	
+	 </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+	</fo:inline>
+	
+	
+	<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+	
+	
+	 </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline  font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+	</fo:inline>
+	
+	
+	<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+	
+	
+	 </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>  
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							  
+							  <fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+	</fo:inline>
+	
+	
+	<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+	
+	
+	 </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>  
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							  
+							  <fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>  
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="55px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>  
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>		
+			
+			<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							
+							  <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">
+							<xsl:text></xsl:text>
+							</fo:block>		
+							 
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	<fo:block margin-left="45px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+	</fo:inline>
+	
+	
+	<fo:inline font-weight="bold" font-size="12px"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+	
+	
+	 </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline  font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+	
+	
+	
+	
+	<fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							  
+							  
+							  <fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							  
+							  
+							  <fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							  
+							  
+							  <fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text>
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							  
+							  <fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+							  
+							  <fo:block>
+															<fo:leader leader-pattern="space" />
+														</fo:block>
+														
+														
+	 <fo:block margin-left="60px" text-align="left" font-size="12px"  color="#000000"  
+							 font-family="NexaBold">		 
+							<fo:inline> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							<fo:inline font-weight="bold"> 
+							<xsl:text></xsl:text>
+							</fo:inline>
+							
+							
+							<fo:inline  font-size="12px" margin-left="55px"  text-align="left"  color="#000000"  
+							 font-family="NexaBold"> 
+							<xsl:text> 
+</xsl:text>
+							</fo:inline>
+							
+							  </fo:block>
+	
+	
+	
+	
+	
+	
+		</fo:block>
+	</fo:flow>
+	</fo:page-sequence>
+	
+	
+			</fo:root>
+	</xsl:template>
+</xsl:stylesheet>
