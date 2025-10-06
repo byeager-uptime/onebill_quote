@@ -120,9 +120,7 @@
 									</fo:block>
 									<fo:block font-size="10pt" font-weight="bold" text-align="right">
 										<xsl:if test="/quote/quoteCreatedDate !=''">
-											Issued: <xsl:value-of select="concat(substring(/quote/quoteCreatedDate, 6, 2), '/',
-											                                      substring(/quote/quoteCreatedDate, 9, 2), '/',
-											                                      substring(/quote/quoteCreatedDate, 1, 4))"/>
+											Issued: <xsl:value-of select="/quote/quoteCreatedDate"/>
 										</xsl:if>
 									</fo:block>
 									<fo:block font-size="9pt" text-align="right" margin-top="2pt">
@@ -176,7 +174,7 @@
 					<!-- Monthly Fees Section -->
 					<xsl:if test="$isRecurringPresent or $isBundlePresent">
 						<fo:block margin-top="15pt" margin-bottom="10pt">
-							<fo:block font-size="14pt" font-weight="bold" color="{$uptime_blue}" margin-bottom="8pt">
+							<fo:block font-size="14pt" font-weight="bold" color="{$uptime_blue}" margin-bottom="15pt">
 								Monthly Fees
 							</fo:block>
 
