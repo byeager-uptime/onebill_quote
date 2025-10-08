@@ -191,26 +191,24 @@
 								<fo:table-column column-width="15%"/>
 
 									<fo:table-header>
-										<fo:table-row font-weight="bold">
-											<fo:table-cell padding="0pt" border-bottom="0.5pt solid #CCCCCC">
-                                    <fo:block background-color="#F5F5F5" padding="6pt" overflow="hidden"
-                                        fox:border-radius="8pt" axf:border-radius="8pt 0 0 0" rx:corner-radius="8pt">Description</fo:block>
+										<fo:table-row background-color="#F5F5F5" font-weight="bold">
+											<fo:table-cell padding="6pt" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Description</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Unit Price</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Unit Price</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Qty</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Qty</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Term</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Term</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Discount</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Discount</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-                                    <fo:block background-color="#F5F5F5" padding="6pt" text-align="right" overflow="hidden"
-                                        fox:border-radius="8pt" axf:border-radius="0 8pt 0 0" rx:corner-radius="8pt">Total</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Total</fo:block>
 											</fo:table-cell>
 										</fo:table-row>
 									</fo:table-header>
@@ -414,26 +412,24 @@
 								<fo:table-column column-width="15%"/>
 
 									<fo:table-header>
-										<fo:table-row font-weight="bold">
-											<fo:table-cell padding="0pt" border-bottom="0.5pt solid #CCCCCC">
-                                    <fo:block background-color="#F5F5F5" padding="6pt" overflow="hidden"
-                                        fox:border-radius="8pt" axf:border-radius="8pt 0 0 0" rx:corner-radius="8pt">Description</fo:block>
+										<fo:table-row background-color="#F5F5F5" font-weight="bold">
+											<fo:table-cell padding="6pt" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Description</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Unit Price</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Unit Price</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Qty</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Qty</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Term</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Term</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-												<fo:block background-color="#F5F5F5" padding="6pt" text-align="right">Discount</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Discount</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
-                                    <fo:block background-color="#F5F5F5" padding="6pt" text-align="right" overflow="hidden"
-                                        fox:border-radius="8pt" axf:border-radius="0 8pt 0 0" rx:corner-radius="8pt">Total</fo:block>
+											<fo:table-cell padding="6pt" text-align="right" border-bottom="0.5pt solid #CCCCCC">
+												<fo:block>Total</fo:block>
 											</fo:table-cell>
 										</fo:table-row>
 									</fo:table-header>
@@ -589,23 +585,15 @@
 								<fo:table-column column-width="33.33%"/>
 								<fo:table-column column-width="33.34%"/>
 								<fo:table-body>
-										<fo:table-row>
-											<fo:table-cell padding="0pt" text-align="center" border-right="1pt solid white">
-                                    <fo:block background-color="{$uptime_blue}" padding="8pt" text-align="center" overflow="hidden"
-                                        fox:border-radius="8pt" axf:border-radius="8pt 0 0 0" rx:corner-radius="8pt">
-													<fo:block font-weight="bold" color="white" font-size="10pt">One-Time Charges</fo:block>
-												</fo:block>
+										<fo:table-row background-color="{$uptime_blue}">
+											<fo:table-cell padding="8pt" text-align="center" border-right="1pt solid white">
+												<fo:block font-weight="bold" color="white" font-size="10pt">One-Time Charges</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="center" border-right="1pt solid white">
-                                    <fo:block background-color="{$uptime_blue}" padding="8pt" text-align="center">
-													<fo:block font-weight="bold" color="white" font-size="10pt">Monthly Fees</fo:block>
-												</fo:block>
+											<fo:table-cell padding="8pt" text-align="center" border-right="1pt solid white">
+												<fo:block font-weight="bold" color="white" font-size="10pt">Monthly Fees</fo:block>
 											</fo:table-cell>
-											<fo:table-cell padding="0pt" text-align="center">
-                                    <fo:block background-color="{$uptime_blue}" padding="8pt" text-align="center" overflow="hidden"
-                                        fox:border-radius="8pt" axf:border-radius="0 8pt 0 0" rx:corner-radius="8pt">
-													<fo:block font-weight="bold" color="white" font-size="10pt">Total Due at Signup</fo:block>
-												</fo:block>
+											<fo:table-cell padding="8pt" text-align="center">
+												<fo:block font-weight="bold" color="white" font-size="10pt">Total Due at Signup</fo:block>
 											</fo:table-cell>
 										</fo:table-row>
 									<fo:table-row>
