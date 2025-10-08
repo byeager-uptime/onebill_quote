@@ -12,6 +12,19 @@
 	<!-- Uptime brand color -->
 	<xsl:variable name="uptime_blue" select="'#214761'" />
 
+	<!-- Company branding variables -->
+	<xsl:variable name="company_name" select="'Uptime VoIP'" />
+	<xsl:variable name="sales_email" select="'sales@uptimevoip.co'" />
+	<xsl:variable name="support_email" select="'help@uptimevoip.co'" />
+	<xsl:variable name="billing_email" select="'billing@uptimevoip.co'" />
+	<xsl:variable name="phone_display" select="'855.402.VOIP (8647)'" />
+	<xsl:variable name="phone_number" select="'855-402-8647'" />
+	<xsl:variable name="address_line1" select="'5444 N Coleman RD, STE D'" />
+	<xsl:variable name="address_city" select="'Coleman'" />
+	<xsl:variable name="address_state" select="'MI'" />
+	<xsl:variable name="address_zip" select="'48618'" />
+	<xsl:variable name="website" select="'uptimevoip.co'" />
+
 	<!-- Helper template to remove minus symbol from negative amounts -->
 	<xsl:template name="removeMinusSymbol">
 		<xsl:param name="amount" />
@@ -93,10 +106,10 @@
 										content-width="150px" content-height="scale-to-fit" scaling="uniform"/>
 								</fo:block>
 								<fo:block font-size="9pt" margin-top="8pt">
-									sales@uptimevoip.co
+									<xsl:value-of select="$sales_email"/>
 								</fo:block>
 								<fo:block font-size="9pt">
-									855.402.VOIP (8647)
+									<xsl:value-of select="$phone_display"/>
 								</fo:block>
 							</fo:table-cell>
 							<!-- Right: Gray Box with Customer Info + ESTIMATE -->
@@ -152,14 +165,14 @@
 							<fo:table-body>
 								<fo:table-row>
 									<fo:table-cell text-align="left">
-										<fo:block>Uptime VoIP</fo:block>
-										<fo:block>5444 N Coleman RD, STE D</fo:block>
-										<fo:block>Coleman MI 48618</fo:block>
+										<fo:block><xsl:value-of select="$company_name"/></fo:block>
+										<fo:block><xsl:value-of select="$address_line1"/></fo:block>
+										<fo:block><xsl:value-of select="concat($address_city, ' ', $address_state, ' ', $address_zip)"/></fo:block>
 									</fo:table-cell>
 									<fo:table-cell text-align="right">
-										<fo:block>855.402.VOIP (8647)</fo:block>
-										<fo:block>help@uptimevoip.co</fo:block>
-										<fo:block>uptimevoip.co</fo:block>
+										<fo:block><xsl:value-of select="$phone_display"/></fo:block>
+										<fo:block><xsl:value-of select="$support_email"/></fo:block>
+										<fo:block><xsl:value-of select="$website"/></fo:block>
 									</fo:table-cell>
 								</fo:table-row>
 							</fo:table-body>
@@ -880,7 +893,7 @@
 							<fo:inline font-weight="bold">18.3 Venue.</fo:inline> For actions to enforce arbitration awards or for temporary relief, the parties consent to exclusive jurisdiction and venue of state or federal courts in Midland County, Michigan.
 						</fo:block>
 						<fo:block space-after="4pt">
-							<fo:inline font-weight="bold">18.4 Notices.</fo:inline> Notices must be in writing to: Provider at billing@uptimevoip.co and 5444 N Coleman RD, STE D, Coleman MI 48618; Client at <xsl:value-of select="/quote/createdByEmail"/> and <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine1"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/city"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/state"/> <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/zip"/>.
+							<fo:inline font-weight="bold">18.4 Notices.</fo:inline> Notices must be in writing to: Provider at <xsl:value-of select="$billing_email"/> and <xsl:value-of select="$address_line1"/>, <xsl:value-of select="$address_city"/> <xsl:value-of select="$address_state"/> <xsl:value-of select="$address_zip"/>; Client at <xsl:value-of select="/quote/createdByEmail"/> and <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine1"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/city"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/state"/> <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/zip"/>.
 						</fo:block>
 						<fo:block space-after="4pt">
 							<fo:inline font-weight="bold">18.5 Assignment.</fo:inline> Client may not assign without Provider's consent. Provider may assign to an affiliate or in connection with a merger or sale of assets.
