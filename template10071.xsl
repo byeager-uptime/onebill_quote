@@ -121,15 +121,12 @@
 									<fo:block font-weight="bold" font-size="11pt" text-align="right" margin-bottom="4pt">
 										<xsl:value-of select="/quote/quoteSubscriberProfile/subscriberName"/>
 									</fo:block>
-									<fo:block font-size="9pt" text-align="right" margin-bottom="2pt">
+									<fo:block font-size="9pt" text-align="right" margin-bottom="8pt">
 										<xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine1"/>
 										<xsl:if test="/quote/quoteSubscriberProfile/billingAddress/addLine2 !=''">, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine2"/></xsl:if>
 										, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/city"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/state"/>
 										<xsl:text> </xsl:text>
 										<xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/zip"/>
-									</fo:block>
-									<fo:block font-size="9pt" text-align="right" margin-bottom="8pt">
-										<xsl:value-of select="/quote/createdByEmail"/>
 									</fo:block>
 									<fo:block font-size="10pt" font-weight="bold" text-align="right">
 										<xsl:if test="/quote/quoteCreatedDate !=''">
@@ -893,7 +890,7 @@
 							<fo:inline font-weight="bold">18.3 Venue.</fo:inline> For actions to enforce arbitration awards or for temporary relief, the parties consent to exclusive jurisdiction and venue of state or federal courts in Midland County, Michigan.
 						</fo:block>
 						<fo:block space-after="4pt">
-							<fo:inline font-weight="bold">18.4 Notices.</fo:inline> Notices must be in writing to: Provider at <xsl:value-of select="$billing_email"/> and <xsl:value-of select="$address_line1"/>, <xsl:value-of select="$address_city"/> <xsl:value-of select="$address_state"/> <xsl:value-of select="$address_zip"/>; Client at <xsl:value-of select="/quote/createdByEmail"/> and <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine1"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/city"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/state"/> <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/zip"/>.
+							<fo:inline font-weight="bold">18.4 Notices.</fo:inline> Notices must be in writing to: Provider at <xsl:value-of select="$billing_email"/>, <xsl:value-of select="$address_line1"/>, <xsl:value-of select="$address_city"/> <xsl:value-of select="$address_state"/> <xsl:value-of select="$address_zip"/>; Client at <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/addLine1"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/city"/>, <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/state"/> <xsl:value-of select="/quote/quoteSubscriberProfile/billingAddress/zip"/>.
 						</fo:block>
 						<fo:block space-after="4pt">
 							<fo:inline font-weight="bold">18.5 Assignment.</fo:inline> Client may not assign without Provider's consent. Provider may assign to an affiliate or in connection with a merger or sale of assets.
